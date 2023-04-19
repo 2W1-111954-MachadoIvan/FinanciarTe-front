@@ -1,0 +1,56 @@
+<div class="container p-5">
+  <div class="row py-5">
+    <div class="col">
+      <h1 class="fs-1"><i class="fa-solid fa-user-tag px-5"></i>{{ cliente.apellidos | uppercase}}, {{ cliente.nombres }} </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl- col-lg-6 col-md-6 col-sm-12">
+      <div class="row">
+        <h1><i class="fa-solid fa-address-card p-2"></i>Datos personales</h1>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <h3><i class="fa-solid fa-cake-candles px-3"></i>{{ cliente.fechaDeNacimiento | edad }} años - {{ cliente.fechaDeNacimiento | date: "dd/MM/YYYY"}}</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <h3><i class="fa-solid fa-phone px-3"></i>{{ cliente.telefono }} </h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <h3><i class="fa-solid fa-at px-3"></i>{{ cliente.email }} </h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <h3><i class="fa-solid fa-location-dot px-3"></i>{{ cliente.direccion }} {{ cliente.numero }} - {{ cliente.ciudad }}, {{ cliente.provincia }} </h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <h1><i class="fa-solid fa-user-group p-2"></i>Contacto alternativo</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <h3><i class="fa-solid fa-signature px-3"></i>{{ cliente.contactoAlternativo }}</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <h3><i class="fa-solid fa-phone px-3"></i>{{ cliente.telefono }}</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <h3><i class="fa-solid fa-at px-3"></i>{{ cliente.email }}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

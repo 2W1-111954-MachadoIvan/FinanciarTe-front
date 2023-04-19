@@ -1,6 +1,11 @@
 @import url('../../../../styles.css');
 
-.login{
-    display: flex;
-    justify-content: center;
+body{
+  display: flex;
+  flex-direction: row;
+}
+
+img{
+  height: 98.1vh;
+  width: 130vh;
 }
