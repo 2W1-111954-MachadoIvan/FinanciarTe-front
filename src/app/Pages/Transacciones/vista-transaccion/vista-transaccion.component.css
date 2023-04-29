@@ -1,0 +1,9 @@
+.saldo-negativo {
+  color: red;
+  font-weight: bold;
+}
+
+.saldo-positivo {
+  color: green;
+  font-weight: bold;
+}

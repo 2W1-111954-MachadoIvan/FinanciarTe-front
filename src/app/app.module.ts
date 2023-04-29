@@ -1,6 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { registerLocaleData } from '@angular/common';
+import localeEsAr from '@angular/common/locales/es-AR';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,6 +25,12 @@ import { VistaClienteComponent } from './Pages/Clientes/vista-cliente/vista-clie
 import { HttpClientModule } from '@angular/common/http';
 import { EdadPipe } from './Pipes/edad.pipe';
 import { DatePipe } from '@angular/common';
+import { AltaTransaccionComponent } from './Pages/Transacciones/alta-transaccion/alta-transaccion.component';
+import { ListadoTransaccionesComponent } from './Pages/Transacciones/listado-transacciones/listado-transacciones.component';
+import { VistaTransaccionComponent } from './Pages/Transacciones/vista-transaccion/vista-transaccion.component';
+import { ModificarTransaccionComponent } from './Pages/Transacciones/modificar-transaccion/modificar-transaccion.component';
+
+registerLocaleData(localeEsAr);
 
 @NgModule({
   declarations: [
@@ -28,7 +41,11 @@ import { DatePipe } from '@angular/common';
     ModificacionClienteComponent,
     ListadoClientesComponent,
     VistaClienteComponent,
-    EdadPipe
+    EdadPipe,
+    AltaTransaccionComponent,
+    ListadoTransaccionesComponent,
+    VistaTransaccionComponent,
+    ModificarTransaccionComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +57,11 @@ import { DatePipe } from '@angular/common';
     MatListModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatFormFieldModule
   ],
   providers: [
     DatePipe
