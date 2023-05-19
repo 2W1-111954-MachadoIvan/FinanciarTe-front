@@ -29,6 +29,15 @@ import { AltaTransaccionComponent } from './Pages/Transacciones/alta-transaccion
 import { ListadoTransaccionesComponent } from './Pages/Transacciones/listado-transacciones/listado-transacciones.component';
 import { VistaTransaccionComponent } from './Pages/Transacciones/vista-transaccion/vista-transaccion.component';
 import { ModificarTransaccionComponent } from './Pages/Transacciones/modificar-transaccion/modificar-transaccion.component';
+import { AltaprestamoComponent } from './Pages/Prestamos/altaprestamo/altaprestamo.component';
+import { ModificarPrestamoComponent } from './Pages/Prestamos/modificar-prestamo/modificar-prestamo.component';
+import { ListadoPrestamoComponent } from './Pages/Prestamos/listado-prestamo/listado-prestamo.component';
+import { VistaPrestamoComponent } from './Pages/Prestamos/vista-prestamo/vista-prestamo.component';
+import { RegistroCuotaComponent } from './Pages/Cuotas/registro-cuota/registro-cuota.component';
+import { ModificarCuotaComponent } from './Pages/Cuotas/modificar-cuota/modificar-cuota.component';
+import { ListadoCuotasComponent } from './Pages/Cuotas/listado-cuotas/listado-cuotas.component';
+import { VistaCuotaComponent } from './Pages/Cuotas/vista-cuota/vista-cuota.component';
+import { GeneralComponent } from './Pages/Prestamos/general/general.component';
 
 registerLocaleData(localeEsAr);
 
@@ -45,7 +54,16 @@ registerLocaleData(localeEsAr);
     AltaTransaccionComponent,
     ListadoTransaccionesComponent,
     VistaTransaccionComponent,
-    ModificarTransaccionComponent
+    ModificarTransaccionComponent,
+    AltaprestamoComponent,
+    ModificarPrestamoComponent,
+    ListadoPrestamoComponent,
+    VistaPrestamoComponent,
+    RegistroCuotaComponent,
+    ModificarCuotaComponent,
+    ListadoCuotasComponent,
+    VistaCuotaComponent,
+    GeneralComponent
   ],
   imports: [
     BrowserModule,
