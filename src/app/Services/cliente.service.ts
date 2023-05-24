@@ -62,4 +62,8 @@ export class ClienteService {
     )
   }
 
+  GetClientesForComboBox():Observable<any>{
+    return this.httpClient.get(`${this.baseUrl}Cliente/getClientesForComboBox`,{ headers: this.headers})
+  }
+
 }

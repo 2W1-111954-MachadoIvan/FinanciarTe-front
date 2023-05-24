@@ -1,8 +1,3 @@
-/* Ancho personalizado para el offcanvas */
-.custom-offcanvas {
-    width: 600px; /* Cambia este valor al ancho deseado */
-}
-  
 .vencida {
     color: red;
 }

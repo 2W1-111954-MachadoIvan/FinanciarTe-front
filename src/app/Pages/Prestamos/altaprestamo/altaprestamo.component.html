@@ -1,1 +1,48 @@
-<p>altaprestamo works!</p>
+<div class="container m-3">
+    <form [formGroup]="form">
+        <div class="row p-2">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <label for="idCliente">Cliente:</label>
+                <select class="form-select" id="idCliente" formControlName="idCliente" required [class.red-icon]="this.form.get('idCliente')?.invalid">
+                    <option [ngValue]="null"></option>
+                    <option *ngFor="let c of clientes" [ngValue]=" c.id ">{{ c.descripcion }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row p-2">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <label for="montoOtorgado">Monto a otorgar:</label>
+                <input type="number" class="form-control" id="montoOtorgado" formControlName="montoOtorgado" required [class.red-icon]="this.form.get('montoOtorgado')?.invalid">
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <label for="cuotas">Cantidad de Cuotas:</label>
+                <select class="form-select" id="cuotas" formControlName="cuotas" required [class.red-icon]="this.form.get('cuotas')?.invalid">
+                    <option [ngValue]="null"></option>
+                    <option *ngFor="let ct of cuotas" [ngValue]="ct">{{ ct }}</option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <label for="cuotas">Dia de vencimiento:</label>
+                <select class="form-select" id="cuotas" formControlName="cuotas" required [class.red-icon]="this.form.get('cuotas')?.invalid">
+                    <option [ngValue]="null"></option>
+                    <option *ngFor="let d of diaVenc" [ngValue]="d">{{ d }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row p-">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="refinanciaDeuda" formControlName="refinanciaDeuda">
+                    <label class="form-check-label" for="refinanciaDeuda">Refinancia deuda</label>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12" *ngIf="this.form.get('refinanciaDeuda')?.value === true">
+                <label for="prestamoRef">Prestamo a refinanciar:</label>
+                <select class="form-select" id="prestamoRef" formControlName="prestamoRef" [class.red-icon]="this.form.get('prestamoRef')?.invalid">
+                    <option [ngValue]=""></option>
+                    <option *ngFor="let p of prestamos" [ngValue]="p.idPrestamo">{{ p.idPrestamo }}</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>

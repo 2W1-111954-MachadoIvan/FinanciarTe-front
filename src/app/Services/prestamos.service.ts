@@ -31,8 +31,12 @@ export class PrestamosService {
     return this.httpClient.get(`${this.baseUrl}Prestamo/getPrestamoById/`+id, { headers: this.headers});
   }
 
-  GetPrestamos(id: number) : Observable<any> {
-    return this.httpClient.get(`${this.baseUrl}Prestamo/getPrestamos/`+id, { headers: this.headers});
+  GetPrestamosByCliente(id: number) : Observable<any> {
+    return this.httpClient.get(`${this.baseUrl}Prestamo/getPrestamosByCliente/`+id, { headers: this.headers});
+  }
+
+  GetPrestamos() : Observable<any> {
+    return this.httpClient.get(`${this.baseUrl}Prestamo/getPrestamos/`, { headers: this.headers});
   }
 
   GetEntidadFinanciera() : Observable<any> {

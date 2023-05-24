@@ -25,7 +25,7 @@ export class ListadoPrestamoComponent implements OnInit{
 
   actualizarListado(id: number){
     this.subscription.add(
-      this.servicio.GetPrestamos(id).subscribe({
+      this.servicio.GetPrestamosByCliente(id).subscribe({
         next: (data) => {this.prestamos = data},
         error: (error) => {console.log(error)}
       })

@@ -56,3 +56,15 @@ export interface DTOCliente {
   telAlt: number;
   emailAlt: string;
 }
+
+export interface ClienteComboBox {
+  id: number;
+  descripcion: string;
+}
+
+export interface ClienteScoring {
+  idCliente: number;
+  idScoring: number;
+  puntos: number;
+  beneficio: number
+}
