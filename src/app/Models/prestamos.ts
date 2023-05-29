@@ -23,11 +23,20 @@ export interface DTOPrestamo{
 }
 
 export interface DTOListadoPrestamos{
-    idPrestamo: number;
-    idCliente: number;
-    montoOtorgado: number;
-    estado: string;
-    cuotasPagas: string;
-    cuotas: DTOCuotas[];
+  idPrestamo: number,
+  cliente: string,
+  dniCliente: number
+  indiceFinanciarTe: number,
+  scoring: number,
+  beneficioScoring: number,
+  montoOtorgado: number,
+  montoADevolver: number,
+  cuotas: number,
+  vencimientoPrimeraCuota: Date,
+  vencimientoUltimaCuota: Date,
+  cuotasPagas: number,
+  montoAbonado: number,
+  saldoPendiente: number,
+  estado: string
 }
 

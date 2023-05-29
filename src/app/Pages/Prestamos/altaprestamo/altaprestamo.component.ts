@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ClienteComboBox } from 'src/app/Models/cliente';
+import { ClienteComboBox, DTOCliente } from 'src/app/Models/cliente';
 import { EntidadesFinancieras } from 'src/app/Models/entidades-financieras';
 import { DTOListadoPrestamos, Prestamos } from 'src/app/Models/prestamos';
 import { ClienteService } from 'src/app/Services/cliente.service';
@@ -13,7 +13,10 @@ import { PrestamosService } from 'src/app/Services/prestamos.service';
   templateUrl: './altaprestamo.component.html',
   styleUrls: ['./altaprestamo.component.css']
 })
-export class AltaprestamoComponent implements OnInit{
+export class AltaprestamoComponent implements OnInit, OnDestroy{
+  @Input() id!: number;
+  @Input() offCanvasNewPrestamo: boolean = false;
+  cliente!: DTOCliente;
   form!: FormGroup;
   prestamo!: Prestamos;
   prestamos!: DTOListadoPrestamos[];
@@ -24,24 +27,23 @@ export class AltaprestamoComponent implements OnInit{
 
   private subscription: Subscription = new Subscription();
 
-  constructor(private servicioPrestamos: PrestamosService, private servicioCliente: ClienteService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(private servicioPrestamos: PrestamosService, private servicioCliente: ClienteService, private formBuilder: FormBuilder, private router: Router, private params: ActivatedRoute) {
     this.form = this.formBuilder.group({
-      idCliente: ['',[Validators.required]],
       cuotas: ['',[Validators.required]],
       montoOtorgado: ['',[Validators.required]],
-      disVencimiento: ['',[Validators.required]],
-      scoring: ['',[Validators.required]],
-      indiceInteres: ['',[Validators.required]],
+      diaVencimiento: ['',[Validators.required]],
       refinanciaDeuda: ['',[]],
       prestamoRef: ['',[]],
       entidadFinanciera: ['',Validators.required],
-      fecha: ['', new Date]
     })
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   ngOnInit(): void {
     this.getCombos();
-    this.actualizarListadoPrestamos(33415122)    
+    this.getCliente(this.id)
   }
 
   getCombos(){
@@ -55,13 +57,28 @@ export class AltaprestamoComponent implements OnInit{
     })
   }
 
-  actualizarListadoPrestamos(id: number){
+  getCliente(id: number){
     this.subscription.add(
-      this.servicioPrestamos.GetPrestamosByCliente(id).subscribe({
-        next: (data) => {this.prestamos = data},
+      this.servicioCliente.GetViewClienteByID(id).subscribe({
+        next: (data) => {this.cliente = data, console.log(this.cliente)},
         error: (error) => {console.log(error)}
       })
     );
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['id']) {
+      this.getCliente(changes['id'].currentValue)
+    }
+  }
+
+  mostrar() {
+    this.offCanvasNewPrestamo = true;
+  }
+
+  ocultar() {
+    this.offCanvasNewPrestamo = false;
+    this.ngOnDestroy()
   }
 
 }

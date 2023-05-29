@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Cliente } from 'src/app/Models/cliente';
+import { DTOCliente } from 'src/app/Models/cliente';
 import { ClienteService } from 'src/app/Services/cliente.service';
 import Swal from 'sweetalert2';
 
@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class ListadoClientesComponent {
 
-  clientes: Cliente[] = [];
+  clientes: DTOCliente[] = [];
   private subscription: Subscription = new Subscription();
 
   constructor(private servicio: ClienteService, private router: Router) { }
@@ -24,7 +24,7 @@ export class ListadoClientesComponent {
   actualizarListado() {
     this.subscription.add(
       this.servicio.GetClientes().subscribe({
-        next: (data) => { this.clientes = data },
+        next: (data) => { this.clientes = data, console.log(this.clientes) },
         error: (error) => { console.log(error) }
       })
     );

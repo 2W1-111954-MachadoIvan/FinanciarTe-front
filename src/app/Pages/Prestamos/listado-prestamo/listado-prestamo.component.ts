@@ -14,11 +14,10 @@ export class ListadoPrestamoComponent implements OnInit{
   idPrestamo: number = 0;
   offCanvasVista: boolean = false;
 
-
   private subscription: Subscription = new Subscription();
 
   constructor(private servicio: PrestamosService, private router: Router){}
-  
+
   ngOnInit(): void {
     this.actualizarListado(33415122);
   }

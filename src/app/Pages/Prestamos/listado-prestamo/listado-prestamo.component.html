@@ -7,6 +7,7 @@
         <tr>
           <th scope="col" class="text-center">ID Prestamo</th>
           <th scope="col" class="text-center">Monto Otorgado</th>
+          <th scope="col" class="text-center">Monto a devolver</th>
           <th scope="col" class="text-center">Estado</th>
           <th scope="col" class="text-center">Cuotas Pagas</th>
           <th scope="col" class="text-center">Acciones</th>
@@ -16,6 +17,7 @@
         <tr *ngFor="let p of prestamos">
           <td scope="col" class="text-center">{{p.idPrestamo }}</td>
           <td scope="col" class="text-center">{{p.montoOtorgado | currency:'ARS':'symbol-narrow':'1.2-2'}}</td>
+          <td scope="col" class="text-center">{{p.montoADevolver | currency:'ARS':'symbol-narrow':'1.2-2'}}</td>
           <td scope="col" class="text-center">{{p.estado}}</td>
           <td scope="col" class="text-center">{{p.cuotasPagas}}</td>
           <td scope="col" class="text-center">

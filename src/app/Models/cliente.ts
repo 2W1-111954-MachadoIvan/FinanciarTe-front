@@ -39,32 +39,28 @@ export interface ComandoCliente {
 }
 
 export interface DTOCliente {
-  nroDni: number;
-  nombres: string;
-  apellidos: string;
-  fechaDeNacimiento: Date;
-  telefono: number;
-  email: string;
-  direccion: string;
-  numero: number;
-  codigoPostal: number;
-  ciudad: number;
-  provincia?: number;
-  puntosIniciales: number;
-  activo: boolean;
-  contactoAlternativo: string;
-  telAlt: number;
-  emailAlt: string;
+  dni: number,
+  nombres: string,
+  apellidos: string,
+  fechaDeNacimiento: Date,
+  telefono: number,
+  email: string,
+  direccion: string,
+  ciudad: string,
+  provincia: string,
+  codigoPostal: number,
+  activo: string,
+  puntosIniciales: number,
+  cantidadDePrestamos: number,
+  puntosActuales: number,
+  scoring: number,
+  beneficioScoring: number,
+  contactoAlternativo: string,
+  emailContAlt: string,
+  telContAlt: number
 }
 
 export interface ClienteComboBox {
   id: number;
   descripcion: string;
-}
-
-export interface ClienteScoring {
-  idCliente: number;
-  idScoring: number;
-  puntos: number;
-  beneficio: number
 }

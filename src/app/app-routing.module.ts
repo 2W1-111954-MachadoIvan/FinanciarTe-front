@@ -35,7 +35,7 @@ const routes: Routes = [
   { path: "prestamos/alta", component: AltaprestamoComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
   { path: "prestamos/listado/:id", component: ListadoPrestamoComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
   { path: "prestamos/modificar/:id", component: ModificarPrestamoComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "prestamos/vista/:id", component: VistaPrestamoComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
+  //{ path: "prestamos/vista/:id", component: VistaPrestamoComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
   { path: "cuotas/alta", component: RegistroCuotaComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
   { path: "cuotas/listado/:id", component: ListadoCuotasComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
   { path: "cuotas/modificar/:id", component: ModificarCuotaComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},

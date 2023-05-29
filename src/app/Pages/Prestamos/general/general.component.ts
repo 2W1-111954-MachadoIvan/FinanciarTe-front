@@ -18,7 +18,7 @@ export class GeneralComponent implements OnInit{
   private subscription: Subscription = new Subscription();
 
   constructor(private servicio: PrestamosService, private router: Router){}
-  
+
   ngOnInit(): void {
     this.actualizarListado();
   }

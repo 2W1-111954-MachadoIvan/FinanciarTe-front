@@ -16,14 +16,14 @@
       <tbody>
         <tr *ngFor="let c of clientes">
           <td scope="col">{{c.nombres}} {{c.apellidos}}</td>
-          <td scope="col">{{c.nroDni}}</td>
+          <td scope="col">{{c.dni}}</td>
           <td scope="col">{{c.telefono}}</td>
           <td scope="col">{{c.email}}</td>
-          <td scope="col">{{c.direccion}} {{c.numero}}</td>
+          <td scope="col">{{c.direccion}}</td>
           <td scope="col">
-            <i type="button" (click)="verCliente(c.nroDni)" class="fa-solid fa-eye me-3 icono" tippy="Ver Cliente"></i>
-            <i type="button"(click)="ModificarCliente(c.nroDni)"  class="fa-solid fa-pencil me-3 icono" tippy="Editar cliente" ></i>
-            <i type="button" (click)="desactivar(c.nroDni)" class="fa-solid fa-ban me-3 icono" tippy="Desactivar cliente"></i>
+            <i type="button" (click)="verCliente(c.dni)" class="fa-solid fa-eye me-3 icono" tippy="Ver Cliente"></i>
+            <i type="button"(click)="ModificarCliente(c.dni)"  class="fa-solid fa-pencil me-3 icono" tippy="Editar cliente" ></i>
+            <i type="button" (click)="desactivar(c.dni)" class="fa-solid fa-ban me-3 icono" tippy="Desactivar cliente"></i>
           </td>
         </tr>
       </tbody>

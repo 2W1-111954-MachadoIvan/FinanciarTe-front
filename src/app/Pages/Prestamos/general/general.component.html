@@ -16,7 +16,7 @@
         <tbody>
           <tr *ngFor="let p of prestamos">
             <td scope="col" class="text-center">{{p.idPrestamo }}</td>
-            <td scope="col" class="text-center">{{p.idCliente }}</td>
+            <td scope="col" class="text-center">{{p.dniCliente }}</td>
             <td scope="col" class="text-center">{{p.montoOtorgado | currency:'ARS':'symbol-narrow':'1.2-2'}}</td>
             <td scope="col" class="text-center">{{p.estado}}</td>
             <td scope="col" class="text-center">{{p.cuotasPagas}}</td>

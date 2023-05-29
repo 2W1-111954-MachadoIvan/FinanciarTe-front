@@ -14,6 +14,7 @@ import { DatePipe } from '@angular/common';
 export class VistaClienteComponent implements OnInit {
   cliente!: DTOCliente;
   idCliente!: number;
+  offCanvasNewPrestamo: boolean = false;
 
   private subscription = new Subscription();
 
@@ -31,6 +32,11 @@ export class VistaClienteComponent implements OnInit {
       next: (data) => {this.cliente = data, console.log(this.cliente)},
       error: (error) => {console.log(error)}
     })
+  }
+
+  newPrestamo(id: number){
+    this.idCliente = id;
+    this.offCanvasNewPrestamo = true;
   }
 
 }
