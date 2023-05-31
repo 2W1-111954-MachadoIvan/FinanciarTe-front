@@ -30,26 +30,14 @@ export class ModificarTransaccionComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.idTransaccion = this.params.snapshot.params['id'];
     this.getTransaccion(this.idTransaccion);
-    console.log(this.transaccion);
     this.getCombos();
-    /*
-    this.transaccion.detalleTransacciones.forEach((d) => {
-        this.detallesTransacciones.push(
-          this.formBuilder.group({
-            idCategoria: [d.idCategoria, Validators.required],
-            detalle: [d.detalle, [Validators.required, Validators.pattern('[a-zA-Z, 1-9]{2,254}')]],
-            monto: [d.monto, [Validators.required, Validators.pattern('^([1-9]\\d*)|[0]')]]
-        })
-      )
-    })
-    */
   }
 
   ngOnDestroy(): void {
   }
 
   get detallesTransacciones(): FormArray {
-    return this.form.get('detalleTransacciones') as FormArray;
+    return this.form.get('detallesTransacciones') as FormArray;
   }
 
   detalleTransaccionForm() {
@@ -70,7 +58,16 @@ export class ModificarTransaccionComponent implements OnInit, OnDestroy{
 
   getTransaccion(id: number){
     this.servicio.GetTransaccionByID(id).subscribe({
-      next: (data) => {this.transaccion = data, console.log(this.transaccion) },
+      next: (data) => {this.transaccion = data, console.log(this.transaccion),this.form.patchValue(this.transaccion),
+                      this.transaccion.detalleTransacciones.forEach((d) => {
+                        this.detallesTransacciones.push(
+                          this.formBuilder.group({
+                            idCategoria: [d.idCategoria, Validators.required],
+                            detalle: [d.detalle, [Validators.required, Validators.pattern('[a-zA-Z, 1-9]{2,254}')]],
+                            monto: [d.monto, [Validators.required, Validators.pattern('^([1-9]\\d*)|[0]')]]
+                        })
+                      )
+                    })},
       error: (error) => {console.log(error)}
     })
   }

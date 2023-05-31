@@ -21,9 +21,9 @@
           <td scope="col" class="text-center">{{p.estado}}</td>
           <td scope="col" class="text-center">{{p.cuotasPagas}}</td>
           <td scope="col" class="text-center">
-            <i type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" (click)="verPrestamo(p.idPrestamo)" class="fa-solid fa-eye me-3 icono" tippy="Ver Transaccion"></i>
-            <i type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" (click)="modificarPrestamo(p.idPrestamo)"  class="fa-solid fa-pencil me-3 icono" tippy="Editar Transaccion" ></i>
-            <i type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" (click)="anular(p.idPrestamo)" class="fa-solid fa-ban me-3 icono" tippy="Anular Transaccion"></i>
+            <i type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" (click)="verPrestamo(p.idPrestamo)" class="fa-solid fa-eye me-3 icono" tippy="Ver Prestamo"></i>
+            <i type="button" (click)="modificarPrestamo(p.idPrestamo)"  class="fa-solid fa-pencil me-3 icono" tippy="Editar Prestamo" ></i>
+            <i type="button" (click)="anular(p.idPrestamo)" class="fa-solid fa-ban me-3 icono" tippy="Anular Prestamo"></i>
           </td>
         </tr>
       </tbody>

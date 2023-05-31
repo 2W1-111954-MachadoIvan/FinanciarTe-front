@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { DTOCliente } from 'src/app/Models/cliente';
 import { ClienteService } from 'src/app/Services/cliente.service';
-import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -13,29 +11,25 @@ import { DatePipe } from '@angular/common';
 })
 export class VistaClienteComponent implements OnInit {
   cliente!: DTOCliente;
-  idCliente!: number;
+  id!: number;
   offCanvasNewPrestamo: boolean = false;
-
-  private subscription = new Subscription();
 
   constructor(private servicio: ClienteService, private params:ActivatedRoute) { }
 
   ngOnInit(): void {
-
-    this.idCliente = this.params.snapshot.params['id']
-
-    this.getCliente(this.idCliente);
+    this.id = this.params.snapshot.params['id'];
+    this.getCliente(this.id);
   }
 
   getCliente(id: number){
     this.servicio.GetViewClienteByID(id).subscribe({
-      next: (data) => {this.cliente = data, console.log(this.cliente)},
+      next: (data) => {this.cliente = data},
       error: (error) => {console.log(error)}
     })
   }
 
   newPrestamo(id: number){
-    this.idCliente = id;
+    this.id = id;
     this.offCanvasNewPrestamo = true;
   }
 

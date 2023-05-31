@@ -38,6 +38,13 @@ import { ModificarCuotaComponent } from './Pages/Cuotas/modificar-cuota/modifica
 import { ListadoCuotasComponent } from './Pages/Cuotas/listado-cuotas/listado-cuotas.component';
 import { VistaCuotaComponent } from './Pages/Cuotas/vista-cuota/vista-cuota.component';
 import { GeneralComponent } from './Pages/Prestamos/general/general.component';
+import { ListadoPuntajeComponent } from './Pages/Puntos/listado-puntaje/listado-puntaje.component';
+import { ReporteCuotasComponent } from './Pages/Reportes/reporte-cuotas/reporte-cuotas.component';
+import { ReporteRecaudacionMensualComponent } from './Pages/Reportes/reporte-recaudacion-mensual/reporte-recaudacion-mensual.component';
+import { ReporteVariacionDolarIndiceComponent } from './Pages/Reportes/reporte-variacion-dolar-indice/reporte-variacion-dolar-indice.component';
+import { ReporteClientesPrestamosComponent } from './Pages/Reportes/reporte-clientes-prestamos/reporte-clientes-prestamos.component';
+import { ReporteBalanceRecomendacionComponent } from './Pages/Reportes/reporte-balance-recomendacion/reporte-balance-recomendacion.component';
+import { ReporteHistoricoPagosComponent } from './Pages/Reportes/reporte-historico-pagos/reporte-historico-pagos.component';
 
 registerLocaleData(localeEsAr);
 
@@ -63,7 +70,14 @@ registerLocaleData(localeEsAr);
     ModificarCuotaComponent,
     ListadoCuotasComponent,
     VistaCuotaComponent,
-    GeneralComponent
+    GeneralComponent,
+    ListadoPuntajeComponent,
+    ReporteCuotasComponent,
+    ReporteRecaudacionMensualComponent,
+    ReporteVariacionDolarIndiceComponent,
+    ReporteClientesPrestamosComponent,
+    ReporteBalanceRecomendacionComponent,
+    ReporteHistoricoPagosComponent
   ],
   imports: [
     BrowserModule,

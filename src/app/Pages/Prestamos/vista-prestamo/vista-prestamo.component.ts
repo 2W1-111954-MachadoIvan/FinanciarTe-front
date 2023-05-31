@@ -26,10 +26,12 @@ export class VistaPrestamoComponent {
   }
 
   getPrestamo(id: number){
-    this.servicio.GetPrestamoByID(id).subscribe({
-      next: (data) => {this.prestamo = data, console.log(this.prestamo) },
-      error: (error) => {console.log(error)}
-    })
+    this.subscription.add(
+      this.servicio.GetPrestamoByID(id).subscribe({
+        next: (data) => {this.prestamo = data, console.log(this.prestamo) },
+        error: (error) => {console.log(error)}
+      })
+    )
   }
 
   ngOnChanges(changes: SimpleChanges) {

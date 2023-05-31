@@ -1,16 +1,20 @@
 import { DTOCuotas } from "./cuotas";
 
 export interface Prestamos {
-    idPrestamo: number;
-    IdCliente: number;
+    idPrestamo?: number;
+    idTransaccion?: number
+    idCliente: number;
     montoOtorgado: number;
-    cuotas:  number;
+    cuotas: number;
     diaVencimientoCuota: number;
     idScoring: number;
     indiceInteres: number;
+    montoADevolver: number;
+    valorCuota: number;
     refinanciaDeuda: boolean;
-    idPrestamoRefinanciado: number;
-    idTransaccion: number;
+    idPrestamoRefinanciado?: number;
+    idEntidadFinanciera: number;
+    fecha: Date
 }
 
 export interface DTOPrestamo{

@@ -10,7 +10,6 @@ export interface Cuotas {
     cuotaVencida: boolean;
     idTransaccion: number;
     idDetalleTransaccion: number;
-    idPuntos: number;
 }
 
 export interface DTOCuotas{
@@ -26,4 +25,19 @@ export interface DTOCuotas{
     idTransaccion: number;
     idDetalleTransaccion: number;
     idPuntos: number;
+}
+
+export interface ViewCuotaCliente{
+    dni: number;
+    cliente: string;
+    idPrestamo: number;
+    cuotaN: number;
+    fechaDeVencimiento: Date;
+    montoDeCuota: number;
+    fechaDePago: Date;
+    montoAbonado: number;
+    cuotaVencida: string;
+    idTransacción: number;
+    idDetalleTransacción: number;
+    puntosOtorgados: number
 }

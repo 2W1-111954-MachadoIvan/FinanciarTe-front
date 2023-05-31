@@ -13,14 +13,15 @@
           <h3 id="scoring">Scoring: {{cliente.scoring}}</h3>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12">
-          <h3 id="indiceInteres">Beneficio: {{cliente.beneficioScoring}}</h3>
+          <h3 id="indiceInteres">Beneficio: {{cliente.beneficioScoring | percent}}</h3>
         </div>
       </div>
-      <form [formGroup]="form">
+      <div *ngIf="cliente.scoring > 1">
+        <form [formGroup]="form">
           <div class="row p-2">
             <div class="col-lg-12 col-md-12 col-sm-12 py-2">
-              <label for="cuotas">Entidad Financiera:</label>
-              <select class="form-select form-select form-select-sm" id="entidadFinanciera" formControlName="entidadFinanciera" required [class.red-icon]="this.form.get('cuotas')?.invalid">
+              <label for="idEntidadFinanciera">Entidad Financiera:</label>
+              <select class="form-select form-select form-select-sm" id="idEntidadFinanciera" formControlName="idEntidadFinanciera" required [class.red-icon]="this.form.get('idEntidadFinanciera')?.invalid">
                 <option [ngValue]="null"></option>
                 <option *ngFor="let ef of entidadesF" [ngValue]="ef.id">{{ ef.descripcion }}</option>
               </select>
@@ -37,8 +38,8 @@
               </select>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 py-2">
-              <label for="cuotas">Dia de vencimiento:</label>
-              <select class="form-select form-select-sm" id="diaVencimiento" formControlName="diaVencimiento" required [class.red-icon]="this.form.get('cuotas')?.invalid">
+              <label for="diaVencimientoCuota">Dia de vencimiento:</label>
+              <select class="form-select form-select-sm" id="diaVencimientoCuota" formControlName="diaVencimientoCuota" required [class.red-icon]="this.form.get('diaVencimientoCuota')?.invalid">
                 <option [ngValue]="null"></option>
                 <option *ngFor="let d of diaVenc" [ngValue]="d">{{ d }}</option>
               </select>
@@ -51,23 +52,42 @@
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 py-2" *ngIf="this.form.get('refinanciaDeuda')?.value === true">
               <label for="prestamoRef">Prestamo a refinanciar:</label>
-              <select class="form-select form-select-sm" id="prestamoRef" formControlName="prestamoRef" [class.red-icon]="this.form.get('prestamoRef')?.invalid">
+              <select class="form-select form-select-sm" id="prestamoRef" formControlName="idPrestamoRefinanciado" [class.red-icon]="this.form.get('idPrestamoRefinanciado')?.invalid">
                 <option [ngValue]=""></option>
                 <option *ngFor="let p of prestamos" [ngValue]="p.idPrestamo">{{ p.idPrestamo }}</option>
               </select>
             </div>
           </div>
-      </form>
-      <div class="row p-2">
+        </form>
+      </div>
+      <div *ngIf="cliente.scoring === 1">
+        <h2>EL cliente no esta habilitado en este momento para recibir un nuevo prestamo.</h2>
+        <h4> Scoring: 1</h4>
+        <h4>No cuenta con los puntos necesarios para la transacción. Revisar posibles deudas o incumplimientos.</h4>
+      </div>
+      <div class="row p-1 mt-5">
         <div class="col-lg-12 col-md-12 col-sm-12">
-          <h3 id="cliente">Monto a devolver: {{(cliente.beneficioScoring + 1)*this.form.get('montoOtorgado')?.value}}</h3>
+          <h5 id="cliente">
+            Monto a devolver: {{(((dolar.indice - cliente.beneficioScoring)*this.form.get('cuotas')?.value)*this.form.get('montoOtorgado')?.value 
+            + this.form.get('montoOtorgado')?.value)  | currency:'ARS':'symbol-narrow':'1.2-2'}}</h5>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12">
-          <h3 id="scoring">Scoring: {{cliente.scoring}}</h3>
+          <h5 id="scoring">CFT: {{(dolar.indice - cliente.beneficioScoring) *this.form.get('cuotas')?.value | percent}}</h5>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12">
-          <h3 id="indiceInteres">Beneficio: {{cliente.beneficioScoring}}</h3>
+          <h5 id="indiceInteres">Indice: {{dolar.indice | percent }}</h5>
         </div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <h5 id="indiceInteres">Indice con beneficio por Scoring: {{dolar.indice - cliente.beneficioScoring | percent }}</h5>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <h5 id="cliente">
+            Monto por cuota: {{(((dolar.indice - cliente.beneficioScoring)*this.form.get('cuotas')?.value)*this.form.get('montoOtorgado')?.value 
+            + this.form.get('montoOtorgado')?.value) / this.form.get('cuotas')?.value  | currency:'ARS':'symbol-narrow':'1.2-2'}}</h5>
+        </div>
+      </div>
+      <div class="row">
+        <button type="button" class="btn btn-primary" (click)="registrarPrestamo()">Enviar</button>
       </div>
     </div>
   </div>

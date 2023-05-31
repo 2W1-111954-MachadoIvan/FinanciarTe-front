@@ -19,16 +19,20 @@ export class PrestamosService {
 
   constructor(private httpClient: HttpClient) { }
 
-  PutTransacciones(prestamo: Prestamos) : Observable<any> {
-    return this.httpClient.put(`${this.baseUrl}Prestamo/modificarPrestamo`, prestamo, { headers: this.headers});
+  PutPrestamo(prestamo: Prestamos) : Observable<any> {
+    return this.httpClient.put(`${this.baseUrl}Prestamo/modificarPrestamo/`+ prestamo.idPrestamo, prestamo, { headers: this.headers});
   }
 
-  PostTransaccion(prestamo: Prestamos) : Observable<ResultadoBase> {
+  PostPrestamo(prestamo: Prestamos) : Observable<ResultadoBase> {
     return this.httpClient.post<ResultadoBase>(`${this.baseUrl}Prestamo/registrarPrestamo`, prestamo, { headers: this.headers});
   }
 
   GetPrestamoByID(id: number) : Observable<any> {
-    return this.httpClient.get(`${this.baseUrl}Prestamo/getPrestamoById/`+id, { headers: this.headers});
+    return this.httpClient.get(`${this.baseUrl}Prestamo/getPrestamoCuotasById/`+id, { headers: this.headers});
+  }
+
+  getPrestamosByIdToMod(id: number) : Observable<any> {
+    return this.httpClient.get(`${this.baseUrl}Prestamo/getPrestamosByIdToMod/`+id, { headers: this.headers});
   }
 
   GetPrestamosByCliente(id: number) : Observable<any> {

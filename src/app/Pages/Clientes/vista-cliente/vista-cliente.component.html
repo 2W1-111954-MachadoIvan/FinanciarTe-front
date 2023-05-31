@@ -1,7 +1,7 @@
 <div class="container p-5">
   <div class="row py-5">
     <div class="col">
-      <h1 class="fs-1"><i class="fa-solid fa-user-tag px-5"></i>{{ cliente.apellidos | uppercase}}, {{ cliente.nombres }} </h1>
+      <h1 class="fs-1"><i class="fa-solid fa-user-tag px-5"></i>{{ cliente.apellidos }}, {{ cliente.nombres }} </h1>
     </div>
   </div>
   <div class="row">
@@ -61,5 +61,5 @@
 
 
 <div *ngIf="offCanvasNewPrestamo == true">
-  <app-altaprestamo [id]="idCliente"></app-altaprestamo>
+  <app-altaprestamo [cliente]="cliente"></app-altaprestamo>
 </div>

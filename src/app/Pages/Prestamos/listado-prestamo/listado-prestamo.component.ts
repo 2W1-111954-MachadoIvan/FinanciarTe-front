@@ -25,7 +25,7 @@ export class ListadoPrestamoComponent implements OnInit{
   actualizarListado(id: number){
     this.subscription.add(
       this.servicio.GetPrestamosByCliente(id).subscribe({
-        next: (data) => {this.prestamos = data},
+        next: (data) => {this.prestamos = data, console.log(this.prestamos)},
         error: (error) => {console.log(error)}
       })
     );
@@ -37,7 +37,7 @@ export class ListadoPrestamoComponent implements OnInit{
   }
 
   modificarPrestamo(id: number){
-
+    this.router.navigateByUrl("prestamos/modificar/" + id)
   }
 
   anular(id: number){
