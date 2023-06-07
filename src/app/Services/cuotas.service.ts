@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
-import { Cuotas } from '../Models/cuotas';
+import { ComandoCuotas, Cuotas } from '../Models/cuotas';
 import { Observable } from 'rxjs';
 import { ResultadoBase } from '../Models/resultado-base';
 
@@ -28,7 +28,7 @@ export class CuotasService {
   }
 
   GetCuotasCliente(id: number) : Observable<any>{
-    return this.httpClient.get(`${this.baseUrl}Cuotas/getCuotasCliente/${id}`, {headers: this.headers})
+    return this.httpClient.get(`${this.baseUrl}Cuotas/getCuotasPendientesByCliente/${id}`, {headers: this.headers})
   }
 
   GetViewCuotasCliente(id: number) : Observable<any>{
@@ -39,7 +39,7 @@ export class CuotasService {
     return this.httpClient.put(`${this.baseUrl}Cuotas/modificarCuota/`+ cuota, { headers: this.headers});
   }
 
-  PostCuota(cuota: Cuotas) : Observable<ResultadoBase> {
+  PostCuota(cuota: ComandoCuotas) : Observable<ResultadoBase> {
     return this.httpClient.post<ResultadoBase>(`${this.baseUrl}Cuotas/registrarCuotas/`, cuota, { headers: this.headers});
   }
 }

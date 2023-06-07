@@ -64,6 +64,10 @@ export class ListadoTransaccionesComponent {
     // })
   }
 
+  registrarTransaccion() {
+    this.router.navigateByUrl("/transacciones/registrar");
+  }
+
   ModificarTransaccion(id: number) {
     this.router.navigateByUrl("/transacciones/modificar/" + id);
   }

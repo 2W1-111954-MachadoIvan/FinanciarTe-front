@@ -31,4 +31,8 @@ export class ListadoCuotasComponent {
     );
   }
 
+  registrarPagos(id: number){
+    this.router.navigateByUrl(`/cuotas/alta/${id}`)
+  }
+
 }

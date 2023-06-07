@@ -4,7 +4,7 @@
             <h1>Listado de Cuotas por Cliente</h1>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-12">
-            <button type="button" class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample">Registrar pagos</button>
+            <button type="button" class="btn btn-primary" (click)="registrarPagos(cuotas[0].dni)">Registrar Pagos</button>
         </div>
     </div>
     <hr />
@@ -35,8 +35,7 @@
             <td scope="col" class="text-center" [ngClass]="{'cuota-vencida': c.cuotaVencida == 'Vencida', 'cuota-enPlazo': c.cuotaVencida != 'Vencida'}">{{c.cuotaVencida}}</td>
             <td scope="col" class="text-center">            
                 <i type="button" class="fa-solid fa-eye me-2 icono" tippy="Ver Cuota"></i>
-                <i type="button" class="fa-solid fa-pencil me-2 icono" tippy="Editar Pago Cuota" ></i>
-                <i type="button" class="fa-solid fa-ban me-2 icono" tippy="Anular Pago Prestamo"></i>
+                <i type="button" class="fa-solid fa-ban me-2 icono" tippy="Anular Pago Cuota"></i>
             </td>
           </tr>
         </tbody>

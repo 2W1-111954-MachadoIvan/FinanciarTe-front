@@ -45,6 +45,7 @@ import { ReporteVariacionDolarIndiceComponent } from './Pages/Reportes/reporte-v
 import { ReporteClientesPrestamosComponent } from './Pages/Reportes/reporte-clientes-prestamos/reporte-clientes-prestamos.component';
 import { ReporteBalanceRecomendacionComponent } from './Pages/Reportes/reporte-balance-recomendacion/reporte-balance-recomendacion.component';
 import { ReporteHistoricoPagosComponent } from './Pages/Reportes/reporte-historico-pagos/reporte-historico-pagos.component';
+import { NgChartsModule } from 'ng2-charts';
 
 registerLocaleData(localeEsAr);
 
@@ -93,7 +94,9 @@ registerLocaleData(localeEsAr);
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    NgChartsModule,
+    //NgxChartsModule
   ],
   providers: [
     DatePipe

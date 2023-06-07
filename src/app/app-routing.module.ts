@@ -19,6 +19,12 @@ import { ListadoCuotasComponent } from './Pages/Cuotas/listado-cuotas/listado-cu
 import { ModificarCuotaComponent } from './Pages/Cuotas/modificar-cuota/modificar-cuota.component';
 import { VistaCuotaComponent } from './Pages/Cuotas/vista-cuota/vista-cuota.component';
 import { GeneralComponent } from './Pages/Prestamos/general/general.component';
+import { ReporteVariacionDolarIndiceComponent } from './Pages/Reportes/reporte-variacion-dolar-indice/reporte-variacion-dolar-indice.component';
+import { ReporteBalanceRecomendacionComponent } from './Pages/Reportes/reporte-balance-recomendacion/reporte-balance-recomendacion.component';
+import { ReporteClientesPrestamosComponent } from './Pages/Reportes/reporte-clientes-prestamos/reporte-clientes-prestamos.component';
+import { ReporteCuotasComponent } from './Pages/Reportes/reporte-cuotas/reporte-cuotas.component';
+import { ReporteHistoricoPagosComponent } from './Pages/Reportes/reporte-historico-pagos/reporte-historico-pagos.component';
+import { ReporteRecaudacionMensualComponent } from './Pages/Reportes/reporte-recaudacion-mensual/reporte-recaudacion-mensual.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -36,10 +42,15 @@ const routes: Routes = [
   { path: "prestamos/listado/:id", component: ListadoPrestamoComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
   { path: "prestamos/modificar/:id", component: ModificarPrestamoComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
   { path: "prestamos/vista/:id", component: VistaPrestamoComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "cuotas/alta", component: RegistroCuotaComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
+  { path: "cuotas/alta/:id", component: RegistroCuotaComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
   { path: "cuotas/listado/:id", component: ListadoCuotasComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
   { path: "cuotas/modificar/:id", component: ModificarCuotaComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "cuotas/vista/:id", component: VistaCuotaComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
+  { path: "reportes/dolar-indice", component: ReporteVariacionDolarIndiceComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
+  { path: "reportes/balance", component: ReporteBalanceRecomendacionComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
+  { path: "reportes/clientes", component: ReporteClientesPrestamosComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
+  { path: "reportes/cuotas", component: ReporteCuotasComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
+  { path: "reportes/pagos", component: ReporteHistoricoPagosComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
+  { path: "reportes/recaudacion", component: ReporteRecaudacionMensualComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
 ];
 
 @NgModule({

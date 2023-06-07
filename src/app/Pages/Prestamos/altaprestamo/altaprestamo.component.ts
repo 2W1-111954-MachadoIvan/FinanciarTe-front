@@ -98,7 +98,7 @@ export class AltaprestamoComponent implements OnInit, OnDestroy{
       montoOtorgado: this.form.get('montoOtorgado')?.value,
       cuotas: this.form.get('cuotas')?.value,
       diaVencimientoCuota: this.form.get('diaVencimientoCuota')?.value,
-      refinanciaDeuda: this.form.get('refinanciaDeuda')?.value, //== '' ? false : true,
+      refinanciaDeuda: this.form.get('refinanciaDeuda')?.value,// == null ? false : true,
       idPrestamoRefinanciado: this.form.get('refinanciaDeuda')?.value != '' ? this.form.get('idPrestamoRefinanciado')?.value : null,
       idScoring: this.cliente.scoring,
       indiceInteres: this.dolar.indice - this.cliente.beneficioScoring,

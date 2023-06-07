@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VistaTransaccionComponent } from './vista-transaccion.component';
+import { VistaTransaccionComponent } from "./VistaTransaccionComponent";
 
 describe('VistaTransaccionComponent', () => {
   let component: VistaTransaccionComponent;
