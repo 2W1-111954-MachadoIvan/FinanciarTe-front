@@ -1,10 +1,11 @@
+@import url(../../../../styles.css);
+
 .cuota-vencida {
     color: red;
     font-weight: bold;
   }
-  
+
 .cuota-enPlazo {
   color: green;
   font-weight: bold;
 }
-  

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DTOListadoPrestamos } from 'src/app/Models/prestamos';
+import { NavbarService } from 'src/app/Services/navbar.service';
 import { PrestamosService } from 'src/app/Services/prestamos.service';
 
 @Component({
@@ -17,10 +18,11 @@ export class GeneralComponent implements OnInit{
 
   private subscription: Subscription = new Subscription();
 
-  constructor(private servicio: PrestamosService, private router: Router){}
+  constructor(private servicio: PrestamosService, private router: Router, private nav: NavbarService){}
 
   ngOnInit(): void {
     this.actualizarListado();
+    this.nav.show();
   }
 
   actualizarListado(){

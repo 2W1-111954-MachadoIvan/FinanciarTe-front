@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ViewCuotaCliente } from 'src/app/Models/cuotas';
 import { CuotasService } from 'src/app/Services/cuotas.service';
+import { NavbarService } from 'src/app/Services/navbar.service';
 
 @Component({
   selector: 'app-listado-cuotas',
@@ -15,11 +16,12 @@ export class ListadoCuotasComponent {
 
   private subscription: Subscription = new Subscription();
 
-  constructor(private servicio: CuotasService, private router: Router, private params: ActivatedRoute){}
+  constructor(private servicio: CuotasService, private router: Router, private params: ActivatedRoute, private nav: NavbarService){}
 
   ngOnInit(): void {
     this.idCliente = this.params.snapshot.params['id'];
     this.actualizarListado(this.idCliente);
+    this.nav.show();
   }
 
   actualizarListado(id: number){

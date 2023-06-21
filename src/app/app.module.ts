@@ -46,6 +46,7 @@ import { ReporteClientesPrestamosComponent } from './Pages/Reportes/reporte-clie
 import { ReporteBalanceRecomendacionComponent } from './Pages/Reportes/reporte-balance-recomendacion/reporte-balance-recomendacion.component';
 import { ReporteHistoricoPagosComponent } from './Pages/Reportes/reporte-historico-pagos/reporte-historico-pagos.component';
 import { NgChartsModule } from 'ng2-charts';
+import { NavbarComponent } from './Pages/Home-Login/navbar/navbar.component';
 
 registerLocaleData(localeEsAr);
 
@@ -78,7 +79,8 @@ registerLocaleData(localeEsAr);
     ReporteVariacionDolarIndiceComponent,
     ReporteClientesPrestamosComponent,
     ReporteBalanceRecomendacionComponent,
-    ReporteHistoricoPagosComponent
+    ReporteHistoricoPagosComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

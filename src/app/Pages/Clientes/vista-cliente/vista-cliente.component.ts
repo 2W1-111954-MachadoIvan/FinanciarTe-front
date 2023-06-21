@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DTOCliente } from 'src/app/Models/cliente';
 import { ClienteService } from 'src/app/Services/cliente.service';
+import { NavbarService } from 'src/app/Services/navbar.service';
 
 
 @Component({
@@ -14,11 +15,12 @@ export class VistaClienteComponent implements OnInit {
   id!: number;
   offCanvasNewPrestamo: boolean = false;
 
-  constructor(private servicio: ClienteService, private params:ActivatedRoute) { }
+  constructor(private servicio: ClienteService, private params:ActivatedRoute, private nav: NavbarService) { }
 
   ngOnInit(): void {
     this.id = this.params.snapshot.params['id'];
     this.getCliente(this.id);
+    this.nav.show();
   }
 
   getCliente(id: number){

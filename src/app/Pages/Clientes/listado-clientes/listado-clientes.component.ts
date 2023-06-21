@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DTOCliente } from 'src/app/Models/cliente';
 import { ClienteService } from 'src/app/Services/cliente.service';
+import { NavbarService } from 'src/app/Services/navbar.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -15,9 +16,10 @@ export class ListadoClientesComponent {
   clientes: DTOCliente[] = [];
   private subscription: Subscription = new Subscription();
 
-  constructor(private servicio: ClienteService, private router: Router) { }
+  constructor(private servicio: ClienteService, private router: Router, private nav: NavbarService) { }
 
   ngOnInit(): void {
+    this.nav.show()
     this.actualizarListado();
   }
 
@@ -50,7 +52,7 @@ export class ListadoClientesComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         this.servicio.DeleteCliente(id).subscribe({
-          next: (resultado) => { Swal.fire('Cliente eliminado!', '', 'success'), this.actualizarListado() },
+          next: (resultado) => { Swal.fire('Cliente eliminado', '', 'success'), this.actualizarListado() },
           error: (error) => { console.log(error); }
         })
 

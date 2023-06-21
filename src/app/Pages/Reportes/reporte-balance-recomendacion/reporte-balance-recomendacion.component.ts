@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ChartData, ChartOptions } from 'chart.js';
 import { Subscription } from 'rxjs';
 import { Balance } from 'src/app/Models/balance';
+import { NavbarService } from 'src/app/Services/navbar.service';
 import { ReportesService } from 'src/app/Services/reportes.service';
 
 @Component({
@@ -61,11 +62,12 @@ export class ReporteBalanceRecomendacionComponent {
 
   private subscription: Subscription = new Subscription();
 
-  constructor(private servicio: ReportesService, private router: Router, private params: ActivatedRoute){
-    
+  constructor(private servicio: ReportesService, private router: Router, private params: ActivatedRoute, private nav: NavbarService){
+
   }
   ngOnInit(): void {
     this.getRecaudacionMensual()
+    this.nav.show();
   }
 
   getRecaudacionMensual(){
@@ -84,5 +86,5 @@ export class ReporteBalanceRecomendacionComponent {
       this.montosActuales.push(d.montoActual);
     }
   }
-  
+
 }

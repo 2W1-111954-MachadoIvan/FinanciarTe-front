@@ -1,0 +1,31 @@
+<div class="sidebar" *ngIf="nav.visible">
+  <div class="logo">
+    <img src="../../../../assets/Icono2.png" alt="Logo">
+  </div>
+  <ul class="nav-links">
+    <li><a href=""><i class="fas fa-chart-bar"></i>Dashboard</a></li>
+    <li>
+      <a href="#clientes"><i class="fas fa-users"></i>Clientes</a>
+      <ul class="sub-menu">
+        <li><a href="/clientes/alta">Nuevo Cliente</a></li>
+        <li><a href="/clientes/listado">Listado de clientes</a></li>
+        <li><a (click)="buscarCliente()">Buscar cliente</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#prestamos"><i class="fas fa-money-bill"></i>Préstamos</a>
+      <ul class="sub-menu">
+        <li><a (click)="prestamosPorCliente()">Prestamos por Cliente</a></li>
+        <li><a href="/prestamos/listadogeneral">Listado de Prestamos</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#transacciones"><i class="fas fa-exchange-alt"></i>Transacciones</a>
+      <ul class="sub-menu">
+        <li><a href="/transacciones/registrar">Nueva Transacción</a></li>
+        <li><a href="/transacciones/listado">Listado de Transacciones</a></li>
+      </ul>
+    </li>
+    <li><a href=""><i class="fas fa-cogs"></i>Ajustes</a></li>
+  </ul>
+</div>

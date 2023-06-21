@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Anulaciones } from 'src/app/Models/anulaciones';
 import { DTOTransacciones } from 'src/app/Models/transacciones';
+import { NavbarService } from 'src/app/Services/navbar.service';
 import { TransaccionesService } from 'src/app/Services/transacciones.service';
 import Swal from 'sweetalert2';
 
@@ -19,49 +21,49 @@ export class ListadoTransaccionesComponent {
 
   private subscription: Subscription = new Subscription();
 
-  constructor(private servicio: TransaccionesService, private router: Router){}
+  constructor(private servicio: TransaccionesService, private router: Router, private nav: NavbarService){}
 
   ngOnInit(): void {
     this.actualizarListado();
+    this.nav.show();
   }
 
   actualizarListado(){
     this.subscription.add(
       this.servicio.GetTransacciones().subscribe({
-        next: (data) => {this.transacciones = data },
+        next: (data) => {this.transacciones = data, console.log(this.transacciones) },
         error: (error) => {console.log(error)}
       })
     );
   }
 
   anular(id: number) {
-    // Swal.fire({
-    //   title: '¿Deseas eliminar este cliente?',
-    //   showDenyButton: false,
-    //   showCancelButton: true,
-    //   confirmButtonText: 'Borrar',
-    //   cancelButtonText: "Cancelar",
-    //   cancelButtonColor: "#dc3545",
-    //   confirmButtonColor: "#2c5672",
-    //   icon: "warning",
-    //   denyButtonText: 'No',
-    //   customClass: {
-    //     actions: 'my-actions',
-    //     cancelButton: 'order-1 right-gap',
-    //     confirmButton: 'order-2',
-    //     denyButton: 'order-3',
-    //   }
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    //     this.servicio.DeleteCliente(id).subscribe({
-    //       next: (resultado) => { Swal.fire('Cliente eliminado!', '', 'success'), this.actualizarListado() },
-    //       error: (error) => { console.log(error); }
-    //     })
 
-    //   } else if (result.isDenied) {
-
-    //   }
-    // })
+    Swal.fire({
+      title: 'Desea anular la transaccion?',
+      input: 'text',
+      showCancelButton: true,
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+      inputValidator: (result) => {
+        if (!result) {
+          return 'Por favor, ingrese un motivo para la anulación';
+        } else {
+          return ''
+        }
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const anulacion: Anulaciones = {
+          id: id,
+          motivoAnulacion: result.value
+        }
+        this.servicio.DeleteSoftTransaccion(anulacion).subscribe({
+          next: (resultado) => { Swal.fire('Transacción anulada', '', 'success'), this.actualizarListado() },
+          error: (error) => { console.log(error); }
+        })
+      }
+    });
   }
 
   registrarTransaccion() {

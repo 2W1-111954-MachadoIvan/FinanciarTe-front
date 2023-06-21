@@ -6,6 +6,7 @@ import { DolarIndice } from 'src/app/Models/dolar-indice';
 import 'chartjs-plugin-annotation';
 import 'chartjs-plugin-datalabels';
 import { ReportesService } from 'src/app/Services/reportes.service';
+import { NavbarService } from 'src/app/Services/navbar.service';
 
 
 @Component({
@@ -77,11 +78,12 @@ export class ReporteVariacionDolarIndiceComponent implements OnInit{
 
   private subscription: Subscription = new Subscription();
 
-  constructor(private servicio: ReportesService, private router: Router, private params: ActivatedRoute){
-    
+  constructor(private servicio: ReportesService, private router: Router, private params: ActivatedRoute, private nav: NavbarService){
+
   }
   ngOnInit(): void {
-    this.getDolarIndice()
+    this.getDolarIndice();
+    this.nav.show();
   }
 
   getDolarIndice(){

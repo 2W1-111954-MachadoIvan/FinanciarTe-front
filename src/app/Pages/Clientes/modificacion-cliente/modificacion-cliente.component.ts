@@ -7,6 +7,7 @@ import { Ciudad } from 'src/app/Models/ciudad';
 import { Cliente, ComandoCliente } from 'src/app/Models/cliente';
 import { Provincia } from 'src/app/Models/provincia';
 import { ClienteService } from 'src/app/Services/cliente.service';
+import { NavbarService } from 'src/app/Services/navbar.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -23,7 +24,8 @@ export class ModificacionClienteComponent implements OnInit{
 
   private subscription = new Subscription();
 
-  constructor(private formBuilder: FormBuilder, private servicio: ClienteService, private params:ActivatedRoute, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private servicio: ClienteService, private params:ActivatedRoute, private router: Router,
+              private nav: NavbarService) {
 
       this.form = this.formBuilder.group({
         nroDni: ['',[Validators.required, Validators.pattern('^([1-9]\\d*)|[0]')]],
@@ -47,6 +49,7 @@ export class ModificacionClienteComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.nav.show()
     this.getCombos();
 
     const fechaControl = this.form.get('fechaDeNacimiento');

@@ -8,6 +8,7 @@ import { EntidadesFinancieras } from 'src/app/Models/entidades-financieras';
 import { DTOListadoPrestamos, Prestamos } from 'src/app/Models/prestamos';
 import { ClienteService } from 'src/app/Services/cliente.service';
 import { DolarIndiceService } from 'src/app/Services/dolar-indice.service';
+import { NavbarService } from 'src/app/Services/navbar.service';
 import { PrestamosService } from 'src/app/Services/prestamos.service';
 import Swal from 'sweetalert2';
 
@@ -30,7 +31,7 @@ export class ModificarPrestamoComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
 
-  constructor(private servicioPrestamos: PrestamosService, private servicioCliente: ClienteService, 
+  constructor(private servicioPrestamos: PrestamosService, private servicioCliente: ClienteService, private nav: NavbarService,
               private servicioDolarIndice: DolarIndiceService, private formBuilder: FormBuilder, private router: Router, private params: ActivatedRoute) {
     this.form = this.formBuilder.group({
       cuotas: ['',[Validators.required]],
@@ -44,6 +45,7 @@ export class ModificarPrestamoComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.nav.show();
   }
 
   ngOnInit(): void {
@@ -64,7 +66,7 @@ export class ModificarPrestamoComponent implements OnInit, OnDestroy {
     });
   }
 
-  getPrestamos(id: number){    
+  getPrestamos(id: number){
     this.servicioPrestamos.GetPrestamosByCliente(id).subscribe({
       next: (resultado) => {this.prestamos = resultado},
       error: (error) => {console.log(error)}
@@ -113,14 +115,14 @@ export class ModificarPrestamoComponent implements OnInit, OnDestroy {
       indiceInteres: this.prestamo.indiceInteres,
       fecha: new Date(),
       montoADevolver: (((this.prestamo.indiceInteres)
-                      *this.form.get('cuotas')?.value)*this.form.get('montoOtorgado')?.value 
+                      *this.form.get('cuotas')?.value)*this.form.get('montoOtorgado')?.value
                       + this.form.get('montoOtorgado')?.value),
       valorCuota: (((this.prestamo.indiceInteres)*this.form.get('cuotas')?.value)
-                  *this.form.get('montoOtorgado')?.value 
+                  *this.form.get('montoOtorgado')?.value
                   + this.form.get('montoOtorgado')?.value) / this.form.get('cuotas')?.value
     }
     console.log(p)
-    
+
     this.servicioPrestamos.PutPrestamo(p).subscribe((data) => {
       if(!data.ok){
         Swal.fire({

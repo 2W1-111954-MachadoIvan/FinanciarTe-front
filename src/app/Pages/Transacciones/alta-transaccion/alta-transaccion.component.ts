@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Categorias } from 'src/app/Models/categorias';
 import { EntidadesFinancieras } from 'src/app/Models/entidades-financieras';
 import { ComandoDetalleTransaccione, ComandoTransaccion } from 'src/app/Models/transacciones';
+import { NavbarService } from 'src/app/Services/navbar.service';
 import { TransaccionesService } from 'src/app/Services/transacciones.service';
 import Swal from 'sweetalert2';
 
@@ -18,7 +19,7 @@ export class AltaTransaccionComponent implements OnInit{
   categorias: Categorias[] = [];
   form!: FormGroup;
 
-  constructor(private servicio: TransaccionesService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(private servicio: TransaccionesService, private formBuilder: FormBuilder, private router: Router, private nav: NavbarService) {
     this.form = this.formBuilder.group({
       idTransaccion: ['',[Validators.required]],
       idEntidadFinanciera: ['',[Validators.required]],
@@ -30,6 +31,7 @@ export class AltaTransaccionComponent implements OnInit{
   ngOnInit(): void {
     this.getCombos();
     this.newDetalleForm();
+    this.nav.show();
   }
 
   ngOnDestroy(): void {

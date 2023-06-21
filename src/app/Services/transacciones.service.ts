@@ -4,6 +4,7 @@ import { environment } from '../environments/environment';
 import { Observable } from 'rxjs';
 import { ResultadoBase } from '../Models/resultado-base';
 import { ComandoTransaccion, DTOTransacciones, Transacciones } from '../Models/transacciones';
+import { Anulaciones } from '../Models/anulaciones';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,10 @@ export class TransaccionesService {
     return this.httpClient.post<ResultadoBase>(`${this.baseUrl}Transacciones/registrarTransaccion`, transaccion, { headers: this.headers});
   }
 
+  PutTransaccion(transaccion: ComandoTransaccion) : Observable<ResultadoBase> {
+    return this.httpClient.put<ResultadoBase>(`${this.baseUrl}Transacciones/modificarTransaccion`, transaccion, { headers: this.headers});
+  }
+
   GetTransaccionByID(id: number) : Observable<any> {
     return this.httpClient.get(`${this.baseUrl}Transacciones/getTransaccionById/`+id, { headers: this.headers});
   }
@@ -37,6 +42,10 @@ export class TransaccionesService {
 
   GetEntidadFinanciera() : Observable<any> {
     return this.httpClient.get(`${this.baseUrl}EntidadesFinancieras/getEntFinForComboBox`, { headers: this.headers});
+  }
+
+  DeleteSoftTransaccion(anulacion: Anulaciones) : Observable<any> {
+    return this.httpClient.put(`${this.baseUrl}Transacciones/deleteSoftTransaccion`, anulacion, { headers: this.headers});
   }
 
 }

@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Categorias } from 'src/app/Models/categorias';
 import { EntidadesFinancieras } from 'src/app/Models/entidades-financieras';
-import { DTOTransacciones_DetT } from 'src/app/Models/transacciones';
+import { ComandoDetalleTransaccione, ComandoTransaccion, DTOTransacciones_DetT } from 'src/app/Models/transacciones';
+import { NavbarService } from 'src/app/Services/navbar.service';
 import { TransaccionesService } from 'src/app/Services/transacciones.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-modificar-transaccion',
@@ -18,7 +20,8 @@ export class ModificarTransaccionComponent implements OnInit, OnDestroy{
   categorias: Categorias[] = [];
   form!: FormGroup;
 
-  constructor(private servicio: TransaccionesService, private formBuilder: FormBuilder, private params: ActivatedRoute) {
+  constructor(private servicio: TransaccionesService, private formBuilder: FormBuilder, private params: ActivatedRoute, private router: Router,
+              private nav: NavbarService) {
     this.form = this.formBuilder.group({
       idTransaccion: ['',[Validators.required]],
       idEntidadFinanciera: ['',[Validators.required]],
@@ -31,6 +34,7 @@ export class ModificarTransaccionComponent implements OnInit, OnDestroy{
     this.idTransaccion = this.params.snapshot.params['id'];
     this.getTransaccion(this.idTransaccion);
     this.getCombos();
+    this.nav.show();
   }
 
   ngOnDestroy(): void {
@@ -62,6 +66,8 @@ export class ModificarTransaccionComponent implements OnInit, OnDestroy{
                       this.transaccion.detalleTransacciones.forEach((d) => {
                         this.detallesTransacciones.push(
                           this.formBuilder.group({
+                            idDetalleTransaccion: [d.idDetalleTransaccion],
+                            idTransaccion: [d.idTransaccion],
                             idCategoria: [d.idCategoria, Validators.required],
                             detalle: [d.detalle, [Validators.required, Validators.pattern('[a-zA-Z, 1-9]{2,254}')]],
                             monto: [d.monto, [Validators.required, Validators.pattern('^([1-9]\\d*)|[0]')]]
@@ -83,28 +89,29 @@ export class ModificarTransaccionComponent implements OnInit, OnDestroy{
     })
   }
 
-  guardar(){/*
+  guardar(){
     const result = this.form.value
     const dts: ComandoDetalleTransaccione[] = [];
 
-    this.detalleTransacciones.value.forEach((d: any) => {
+    this.detallesTransacciones.value.forEach((d: any) => {
       const det = {
-        idDetalleTransaccion: 0,
+        idDetalleTransaccion: d.idDetalleTransaccion,
         idCategoria: d.idCategoria,
         detalle: d.detalle,
         monto: d.monto,
-        idTransaccion: 0
+        idTransaccion: d.idTransaccion
       }
       dts.push(det)
     })
 
     const tr: ComandoTransaccion = {
-      idTransaccion: 0,
-      fechaTransaccion: new Date(),
+      idTransaccion: this.transaccion.idTransaccion,
+      fechaTransaccion: this.transaccion.fechaTransaccion,
       idEntidadFinanciera: result.idEntidadFinanciera,
       detallesTransacciones: dts
     }
-    this.servicio.PostTransaccion(tr).subscribe((data) => {
+
+    this.servicio.PutTransaccion(tr).subscribe((data) => {
       if(!data.ok){
         Swal.fire({
           icon: 'error',
@@ -122,7 +129,7 @@ export class ModificarTransaccionComponent implements OnInit, OnDestroy{
         });
         this.router.navigateByUrl("/transacciones/listado");
       }
-    });*/
+    });
   }
 
 }

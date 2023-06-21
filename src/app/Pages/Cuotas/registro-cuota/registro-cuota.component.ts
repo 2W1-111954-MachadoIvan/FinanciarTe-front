@@ -7,6 +7,7 @@ import { DolarIndice } from 'src/app/Models/dolar-indice';
 import { EntidadesFinancieras } from 'src/app/Models/entidades-financieras';
 import { CuotasService } from 'src/app/Services/cuotas.service';
 import { DolarIndiceService } from 'src/app/Services/dolar-indice.service';
+import { NavbarService } from 'src/app/Services/navbar.service';
 import { TransaccionesService } from 'src/app/Services/transacciones.service';
 import Swal from 'sweetalert2';
 
@@ -27,8 +28,8 @@ export class RegistroCuotaComponent implements OnInit{
 
   private subscription: Subscription = new Subscription();
 
-  constructor(private servicioCuota: CuotasService, private servicioTransacciones: TransaccionesService, private formBuilder: FormBuilder, 
-              private router: Router, private params: ActivatedRoute){
+  constructor(private servicioCuota: CuotasService, private servicioTransacciones: TransaccionesService, private formBuilder: FormBuilder,
+              private router: Router, private params: ActivatedRoute, private nav: NavbarService){
     this.idCliente = 33415122
     this.form = this.formBuilder.group({
       idTransaccion: ['',[Validators.required]],
@@ -41,6 +42,7 @@ export class RegistroCuotaComponent implements OnInit{
   ngOnInit(): void {
     this.getCombos();
     this.actualizarListado(this.idCliente);
+    this.nav.show();
   }
 
   actualizarListado(id: number){

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DTOListadoPrestamos } from 'src/app/Models/prestamos';
+import { NavbarService } from 'src/app/Services/navbar.service';
 import { PrestamosService } from 'src/app/Services/prestamos.service';
 
 @Component({
@@ -10,16 +11,19 @@ import { PrestamosService } from 'src/app/Services/prestamos.service';
   styleUrls: ['./listado-prestamo.component.css']
 })
 export class ListadoPrestamoComponent implements OnInit{
+  id!: number;
   prestamos: DTOListadoPrestamos[] = [];
   idPrestamo: number = 0;
   offCanvasVista: boolean = false;
 
   private subscription: Subscription = new Subscription();
 
-  constructor(private servicio: PrestamosService, private router: Router){}
+  constructor(private servicio: PrestamosService, private router: Router, private params: ActivatedRoute, private nav: NavbarService){}
 
   ngOnInit(): void {
-    this.actualizarListado(33415122);
+    this.id = this.params.snapshot.params['id'];
+    this.actualizarListado(this.id);
+    this.nav.show();
   }
 
   actualizarListado(id: number){
