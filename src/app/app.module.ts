@@ -47,6 +47,10 @@ import { ReporteBalanceRecomendacionComponent } from './Pages/Reportes/reporte-b
 import { ReporteHistoricoPagosComponent } from './Pages/Reportes/reporte-historico-pagos/reporte-historico-pagos.component';
 import { NgChartsModule } from 'ng2-charts';
 import { NavbarComponent } from './Pages/Home-Login/navbar/navbar.component';
+import { AltaUsuarioComponent } from './Pages/Usuarios/alta-usuario/alta-usuario.component';
+import { ModificarUsuarioComponent } from './Pages/Usuarios/modificar-usuario/modificar-usuario.component';
+import { ListadoUsuarioComponent } from './Pages/Usuarios/listado-usuario/listado-usuario.component';
+import { VistaUsuarioComponent } from './Pages/Usuarios/vista-usuario/vista-usuario.component';
 
 registerLocaleData(localeEsAr);
 
@@ -80,7 +84,11 @@ registerLocaleData(localeEsAr);
     ReporteClientesPrestamosComponent,
     ReporteBalanceRecomendacionComponent,
     ReporteHistoricoPagosComponent,
-    NavbarComponent
+    NavbarComponent,
+    AltaUsuarioComponent,
+    ModificarUsuarioComponent,
+    ListadoUsuarioComponent,
+    VistaUsuarioComponent
   ],
   imports: [
     BrowserModule,
