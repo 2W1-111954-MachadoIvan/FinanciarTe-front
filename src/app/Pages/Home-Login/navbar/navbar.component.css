@@ -1,9 +1,12 @@
+@import url(../../../../styles.css);
+
 .sidebar {
   width: 200px;
   height: 100vh;
   background-color: #333;
   color: #fff;
   padding: 20px;
+  z-index: 9990;
 }
 
 .logo img {
@@ -58,6 +61,7 @@
   width: 200px;
   border-left: 3px solid #777;
   pointer-events: none; /* Añadido */
+  z-index: 9990;
 }
 
 .nav-links li:hover .sub-menu {

@@ -25,8 +25,8 @@ export class ReportesService {
     return this.httpClient.get(`${this.baseUrl}Reportes/getMaxMInDolarIndice`, { headers: this.headers});
   }
 
-  GetClientesConMasPrestamo() : Observable<any> {
-    return this.httpClient.get(`${this.baseUrl}Reportes/getClientesConMasPrestamos`, { headers: this.headers});
+  GetResumenPrestamos() : Observable<any> {
+    return this.httpClient.get(`${this.baseUrl}Reportes/getResumenPrestamos`, { headers: this.headers});
   }
 
   GetRecaudacionMensual() : Observable<any> {

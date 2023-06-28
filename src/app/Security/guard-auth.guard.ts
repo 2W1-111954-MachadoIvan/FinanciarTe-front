@@ -20,8 +20,8 @@ export class GuardAuthGuard implements CanActivate {
       return true;
     }
 
-    this.displayErrors("Para acceder a esta función debe iniciar sesión", "Error");
-    this.router.navigate(['/seguridad/login']);
+    this.displayErrors("Se requiere que inicie sesion", "Error");
+    this.router.navigate(['/login']);
     return false;
   }
 

@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChartData, ChartOptions } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 import { Subscription } from 'rxjs';
-import { DTOCliente } from 'src/app/Models/cliente';
+import { ResumenPrestamos } from 'src/app/Models/resumen-prestamos';
 import { NavbarService } from 'src/app/Services/navbar.service';
 import { ReportesService } from 'src/app/Services/reportes.service';
+import { Colors } from 'src/app/Settings/colors';
 
 @Component({
   selector: 'app-reporte-clientes-prestamos',
@@ -12,18 +14,50 @@ import { ReportesService } from 'src/app/Services/reportes.service';
   styleUrls: ['./reporte-clientes-prestamos.component.css']
 })
 export class ReporteClientesPrestamosComponent {
+  @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
+  colores = Colors
   labels: string[] = [];
-  values: number[] = [];
-  clientes: DTOCliente[] = [];
+  qPrestamos: number[] = [];
+  qCancelados: number[] = [];
+  qPendientes: number[] = [];
+  qRefinanciados: number[] = [];
+  qCuotasVencidas: number[] = [];
+  qTotalCuotas: number[] = [];
+  qPorcCumplCuotas: number[] = [];
+  clientes: ResumenPrestamos[] = [];
   datos: ChartData = {
     labels: this.labels,
     datasets: [{
       type: 'bar',
-      label: 'Monto Actual',
-      data: this.values,
-      borderColor: 'green',
-      backgroundColor: ['rgba(0, 255, 0, 0.5)']
-    }]
+      label: 'Total Prestamos',
+      data: this.qPrestamos,
+      backgroundColor: this.colores.lightblue
+    },
+    {
+      type: 'bar',
+      label: 'Cancelados',
+      data: this.qCancelados,
+      backgroundColor: this.colores.green
+    },
+    {
+      type: 'bar',
+      label: 'Pendientes',
+      data: this.qPendientes,
+      backgroundColor: this.colores.orange
+    },
+    {
+      type: 'bar',
+      label: 'Refinanciados',
+      data: this.qRefinanciados,
+      backgroundColor: this.colores.red
+    },
+    {
+      type: 'line',
+      label: '% Cumpl. Cuotas',
+      data: this.qPorcCumplCuotas,
+      backgroundColor: this.colores.lightcoral,
+      yAxisID: 'line'
+    },]
   }
 
   options: ChartOptions = {
@@ -31,12 +65,12 @@ export class ReporteClientesPrestamosComponent {
       datalabels: {
           display: true,
           anchor: 'end',
-          align: 'top',
+          align: 'end',
           color: '#000',
           font: {
               weight: 'bold'
           }
-      }
+      },
     },
     responsive: true,
     scales: {
@@ -46,8 +80,19 @@ export class ReporteClientesPrestamosComponent {
         position: 'left',
         title: {display: true, text: 'Cantidad de Prestamos'},
         ticks: {
-          stepSize: 3
+          stepSize: 5
         }
+      },
+      line: {
+        beginAtZero: true,
+        type: 'linear',
+        position: 'right',
+        ticks: {
+          callback: function (value) {
+            return value + '%';
+          },
+        },
+        title: {display: true, text: '% Cumplimiento de Cuotas'}
       }
     }
   }
@@ -64,17 +109,23 @@ export class ReporteClientesPrestamosComponent {
 
   getRecaudacionMensual(){
     this.subscription.add(
-      this.servicio.GetClientesConMasPrestamo().subscribe({
-        next: (data) => {this.clientes = data, console.log(this.clientes),this.llenarArrays(this.clientes)},
+      this.servicio.GetResumenPrestamos().subscribe({
+        next: (data) => {this.clientes = data, console.log(this.clientes),this.llenarArrays(this.clientes), this.chart?.chart?.update()},
         error: (error) => {console.log(error)}
       })
     );
   }
 
-  llenarArrays(datos: DTOCliente[]){
+  llenarArrays(datos: ResumenPrestamos[]){
     for (let d of datos) {
-      this.labels.push(`${d.apellidos}, ${d.nombres}`);
-      this.values.push(d.cantidadDePrestamos);
+      this.labels.push(d.nombre);
+      this.qPrestamos.push(d.cantidadDePrestamos);
+      this.qCancelados.push(d.prestamosCancelados);
+      this.qPendientes.push(d.prestamosPendientes);
+      this.qRefinanciados.push(d.prestamosRefinanciados);
+      if(d.totalDeCuotas > 0){
+        this.qPorcCumplCuotas.push(d.porcentajeCumplCuotas * 100)
+      }
     }
   }
 

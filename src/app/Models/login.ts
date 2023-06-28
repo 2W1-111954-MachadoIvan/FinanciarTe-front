@@ -1,7 +1,7 @@
 export interface Login {
-    usuario: string;
-    contrasenia: string;
-    roles: string[];
+    user: string;
+    pass: string;
+    tipoUsuario: string;
     token: string;
     activo: boolean; 
     nombre: string;

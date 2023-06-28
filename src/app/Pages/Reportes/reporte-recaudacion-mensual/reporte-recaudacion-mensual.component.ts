@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChartData, ChartOptions } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 import { Subscription } from 'rxjs';
 import { RecaudacionMensual } from 'src/app/Models/recaudacion-mensual';
 import { NavbarService } from 'src/app/Services/navbar.service';
@@ -12,6 +13,7 @@ import { ReportesService } from 'src/app/Services/reportes.service';
   styleUrls: ['./reporte-recaudacion-mensual.component.css']
 })
 export class ReporteRecaudacionMensualComponent {
+  @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
   valores: number[] = [];
   recaudacionMensual: RecaudacionMensual[] = [];
   datos: ChartData = {
@@ -28,7 +30,7 @@ export class ReporteRecaudacionMensualComponent {
   options: ChartOptions = {
     plugins: {
       legend: {
-          display: true,
+          display: false,
           //backgroundcolor // Oculta la leyenda
       }
     },
@@ -59,7 +61,7 @@ export class ReporteRecaudacionMensualComponent {
   getRecaudacionMensual(){
     this.subscription.add(
       this.servicio.GetRecaudacionMensual().subscribe({
-        next: (data) => {this.recaudacionMensual = data, this.llenarArrays(this.recaudacionMensual)},
+        next: (data) => {this.recaudacionMensual = data, this.llenarArrays(this.recaudacionMensual), this.chart?.chart?.update()},
         error: (error) => {console.log(error)}
       })
     );

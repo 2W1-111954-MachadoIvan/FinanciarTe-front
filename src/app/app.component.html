@@ -1,12 +1,12 @@
-<div class="row" *ngIf="nav.visible">
+<div class="row" *ngIf="nav.visible" style="background-color: aliceblue;">
   <div class="col-lg-1 col-md-1 col-sm-1">
     <app-navbar></app-navbar>
   </div>
-  <div class="pt-5 col-lg-11 col-md-11 col-sm-12">
+  <div class="col-lg-11 col-md-11 col-sm-12">
     <router-outlet></router-outlet>
   </div>
 </div>
 
-<div *ngIf="!nav.visible">
+<div *ngIf="!nav.visible" style="background-color: aliceblue;">
   <router-outlet></router-outlet>
 </div>

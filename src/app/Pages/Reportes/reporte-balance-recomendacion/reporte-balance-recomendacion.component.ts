@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChartData, ChartOptions } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 import { Subscription } from 'rxjs';
 import { Balance } from 'src/app/Models/balance';
 import { NavbarService } from 'src/app/Services/navbar.service';
@@ -12,6 +13,7 @@ import { ReportesService } from 'src/app/Services/reportes.service';
   styleUrls: ['./reporte-balance-recomendacion.component.css']
 })
 export class ReporteBalanceRecomendacionComponent {
+  @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
   labels: string[] = [];
   montosIniciales: number[] = [];
   montosActuales: number[] = [];
@@ -73,7 +75,7 @@ export class ReporteBalanceRecomendacionComponent {
   getRecaudacionMensual(){
     this.subscription.add(
       this.servicio.GetBalance().subscribe({
-        next: (data) => {this.balance = data, console.log(this.balance),this.llenarArrays(this.balance)},
+        next: (data) => {this.balance = data, console.log(this.balance),this.llenarArrays(this.balance), this.chart?.chart?.update()},
         error: (error) => {console.log(error)}
       })
     );

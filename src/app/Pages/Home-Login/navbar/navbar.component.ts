@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/Services/login-service.service';
 import { NavbarService } from 'src/app/Services/navbar.service';
 import Swal from 'sweetalert2';
 
@@ -9,7 +10,21 @@ import Swal from 'sweetalert2';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  constructor(public nav: NavbarService, private router: Router ) {}
+  constructor(public nav: NavbarService, private router: Router, private loginService: LoginService ) {}
+
+  desloguear(): void {
+    this.loginService.desloguearUsuario();
+    this.nav.hide();
+
+  }
+
+  getDisplayUserName() {
+    return `${this.loginService.getUser().nombres} `;
+  }
+
+  userHasRole(roles: string[]): boolean {
+    return this.loginService.checkUseHasRole(roles);
+  }
 
   async prestamosPorCliente(){
     Swal.fire({

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChartData, ChartOptions } from 'chart.js';
 import { Subscription } from 'rxjs';
@@ -7,6 +7,10 @@ import 'chartjs-plugin-annotation';
 import 'chartjs-plugin-datalabels';
 import { ReportesService } from 'src/app/Services/reportes.service';
 import { NavbarService } from 'src/app/Services/navbar.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { BaseChartDirective } from 'ng2-charts';
+import { Colors } from 'src/app/Settings/colors';
+import 'chartjs-adapter-moment';
 
 
 @Component({
@@ -15,7 +19,12 @@ import { NavbarService } from 'src/app/Services/navbar.service';
   styleUrls: ['./reporte-variacion-dolar-indice.component.css']
 })
 export class ReporteVariacionDolarIndiceComponent implements OnInit{
-  hFechas: Date[] = [];
+  @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
+  colores = Colors
+  form!: FormGroup;
+  fechaDesde!: any;
+  fechaHasta!: any;
+  hFechas: any[] = [];
   hDolarOficial: number[] = [];
   hDolarBlue: number[] = [];
   hIndices: number[] = [];
@@ -27,16 +36,23 @@ export class ReporteVariacionDolarIndiceComponent implements OnInit{
       type: 'bar',
       label: 'Dolar Oficial',
       data: this.hDolarOficial,
-      borderColor: 'blue',
-      backgroundColor: 'blue',
+      borderColor: this.colores.ligthgreen,
+      backgroundColor: this.colores.ligthgreen,
+      yAxisID: 'y1'
+    }, {
+      type: 'bar',
+      label: 'Dolar Blue',
+      data: this.hDolarBlue,
+      borderColor: this.colores.lightblue,
+      backgroundColor: this.colores.lightblue,
       yAxisID: 'y1'
     }, {
       type: 'line',
       label: 'Indice FinanciarTe',
       data: this.hIndices,
       fill: false,
-      borderColor: 'red',
-      pointBackgroundColor: 'red',
+      borderColor: this.colores.indianred,
+      pointBackgroundColor: this.colores.indianred,
       yAxisID: 'y2'
     }]
   }
@@ -44,13 +60,26 @@ export class ReporteVariacionDolarIndiceComponent implements OnInit{
   options: ChartOptions = {
     responsive: true,
     scales: {
+      x:{
+        type: 'time',
+        time: {
+          unit:'day', // or year, month, day of week, hour, minute, second
+          displayFormats: {
+            day: 'DD/MM/YYYY', // Formato para mostrar días
+            month: 'MM/YYYY', // Formato para mostrar meses
+            year: 'YYYY' // Formato para mostrar años
+            // Puedes agregar otros formatos según tus necesidades
+          },
+          tooltipFormat: 'DD/MM/YYYY'
+        }
+      },
       y1: {
         beginAtZero: true,
         type: 'linear',
         position: 'left',
-        title: {display: true, text: 'Dolar Oficial'},
+        title: {display: true, text: 'Precio Dolar Oficial - Blue'},
         ticks: {
-          stepSize: 100
+          stepSize: 200
         }
       },
       y2: {
@@ -78,8 +107,12 @@ export class ReporteVariacionDolarIndiceComponent implements OnInit{
 
   private subscription: Subscription = new Subscription();
 
-  constructor(private servicio: ReportesService, private router: Router, private params: ActivatedRoute, private nav: NavbarService){
-
+  constructor(private servicio: ReportesService, private router: Router, private formBuilder: FormBuilder,
+    private params: ActivatedRoute, private nav: NavbarService){
+    this.form = this.formBuilder.group({
+      fechaDesde: [this.fechaDesde],
+      fechaHasta: [this.fechaHasta],
+    })
   }
   ngOnInit(): void {
     this.getDolarIndice();
@@ -89,7 +122,7 @@ export class ReporteVariacionDolarIndiceComponent implements OnInit{
   getDolarIndice(){
     this.subscription.add(
       this.servicio.GetValoresDolarIndice().subscribe({
-        next: (data) => {this.dolarIndice = data, this.llenarArraysG1(this.dolarIndice)},
+        next: (data) => {this.dolarIndice = data, this.llenarArraysG1(this.dolarIndice), this.chart?.chart?.update()},
         error: (error) => {console.log(error)}
       })
     );
@@ -107,19 +140,46 @@ export class ReporteVariacionDolarIndiceComponent implements OnInit{
   */
 
   llenarArraysG1(datos: DolarIndice[]){
-    datos.sort((a, b) => {
-      const fechaA = new Date(a.fecha);
-      const fechaB = new Date(b.fecha);
-      return fechaA.getTime() - fechaB.getTime();
-    })
-
     for (let d of datos) {
-      this.hFechas.push(d.fecha);
+      this.hFechas.push(new Date(d.fecha).toISOString().substring(0, 10));
       this.hDolarOficial.push(d.valorDolar);
+      this.hDolarBlue.push(d.valorDolarBlue);
       this.hIndices.push(d.indice*100);
     }
+
+    const primeraFecha = new Date(this.hFechas[this.hFechas.length - 21])
+    const ultimaFecha = new Date(this.hFechas[this.hFechas.length - 1]);   
+
+    this.fechaDesde = new Date(primeraFecha).toISOString().substring(0, 10);
+    this.fechaHasta =  new Date(ultimaFecha).toISOString().substring(0, 10);
+
+    this.filtrarFechas()
+
   }
 
-  
+  filtrarFechas(){
+    const fechas = [...this.hFechas];
+    const dolarOficial = [...this.hDolarOficial];
+    const dolarBlue = [...this.hDolarBlue];
+    const indice = [...this.hIndices];
+    const inicio = this.form.get('fechaDesde')?.value ?? this.fechaDesde;
+    const fin = this.form.get('fechaHasta')?.value ?? this.fechaHasta;
+
+    const indexInicio = fechas.indexOf(inicio);
+    const indexFin = fechas.indexOf(fin);
+
+    const filterFechas = fechas.slice(indexInicio, indexFin + 1);
+    const filterDolarOficial = dolarOficial.slice(indexInicio, indexFin + 1);
+    const filterDolarBlue = dolarBlue.slice(indexInicio, indexFin + 1);
+    const filterIndices = indice.slice(indexInicio, indexFin + 1);
+
+    this.datos.labels = filterFechas;
+    this.datos.datasets[0].data = filterDolarOficial;
+    this.datos.datasets[1].data = filterDolarBlue;
+    this.datos.datasets[2].data = filterIndices;
+    
+    this.chart.chart?.update();
+
+  }
 
 }

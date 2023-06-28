@@ -25,32 +25,45 @@ import { ReporteClientesPrestamosComponent } from './Pages/Reportes/reporte-clie
 import { ReporteCuotasComponent } from './Pages/Reportes/reporte-cuotas/reporte-cuotas.component';
 import { ReporteHistoricoPagosComponent } from './Pages/Reportes/reporte-historico-pagos/reporte-historico-pagos.component';
 import { ReporteRecaudacionMensualComponent } from './Pages/Reportes/reporte-recaudacion-mensual/reporte-recaudacion-mensual.component';
+import { AltaUsuarioComponent } from './Pages/Usuarios/alta-usuario/alta-usuario.component';
+import { ModificarUsuarioComponent } from './Pages/Usuarios/modificar-usuario/modificar-usuario.component';
+import { ListadoUsuarioComponent } from './Pages/Usuarios/listado-usuario/listado-usuario.component';
+import { VistaUsuarioComponent } from './Pages/Usuarios/vista-usuario/vista-usuario.component';
+import { GuardAuthGuard } from './Security/guard-auth.guard';
+import { DashboardComponent } from './Pages/Home-Login/dashboard/dashboard.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: "login", component: LoginComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "clientes/alta", component: AltaClienteComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "clientes/modificar/:id", component: ModificacionClienteComponent },
-  { path: "clientes/listado", component: ListadoClientesComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "clientes/vista/:id", component: VistaClienteComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "transacciones/registrar", component: AltaTransaccionComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "transacciones/modificar/:id", component:  ModificarTransaccionComponent },
-  { path: "transacciones/listado", component: ListadoTransaccionesComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "transacciones/vista/:id", component: VistaTransaccionComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "prestamos/listadogeneral", component: GeneralComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "prestamos/alta", component: AltaprestamoComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "prestamos/listado/:id", component: ListadoPrestamoComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "prestamos/modificar/:id", component: ModificarPrestamoComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "prestamos/vista/:id", component: VistaPrestamoComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "cuotas/alta/:id", component: RegistroCuotaComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "cuotas/listado/:id", component: ListadoCuotasComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "cuotas/modificar/:id", component: ModificarCuotaComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "reportes/dolar-indice", component: ReporteVariacionDolarIndiceComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "reportes/balance", component: ReporteBalanceRecomendacionComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "reportes/clientes", component: ReporteClientesPrestamosComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "reportes/cuotas", component: ReporteCuotasComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "reportes/pagos", component: ReporteHistoricoPagosComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
-  { path: "reportes/recaudacion", component: ReporteRecaudacionMensualComponent/*, canActivate: [GuardAuthGuard], data: { roles: ['Admin', 'Vendedor'] } */},
+  { path: '', component: LoginComponent },
+  { path: "login", component: LoginComponent },
+  { path: "dashboard", component: DashboardComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "clientes/alta", component: AltaClienteComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "clientes/modificar/:id", component: ModificacionClienteComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] }  },
+  { path: "clientes/listado", component: ListadoClientesComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "clientes/vista/:id", component: VistaClienteComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "transacciones/registrar", component: AltaTransaccionComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "transacciones/modificar/:id", component:  ModificarTransaccionComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] }  },
+  { path: "transacciones/listado", component: ListadoTransaccionesComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "transacciones/vista/:id", component: VistaTransaccionComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "prestamos/listadogeneral", component: GeneralComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "prestamos/alta", component: AltaprestamoComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "prestamos/listado/:id", component: ListadoPrestamoComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "prestamos/modificar/:id", component: ModificarPrestamoComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "prestamos/vista/:id", component: VistaPrestamoComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "cuotas/alta/:id", component: RegistroCuotaComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "cuotas/listado/:id", component: ListadoCuotasComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "cuotas/modificar/:id", component: ModificarCuotaComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "usuarios/alta", component: AltaUsuarioComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "usuarios/modificar/:id", component: ModificarUsuarioComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] }  },
+  { path: "usuarios/listado", component: ListadoUsuarioComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "usuarios/vista/:id", component: VistaUsuarioComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "reportes/dolar-indice", component: ReporteVariacionDolarIndiceComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "reportes/balance", component: ReporteBalanceRecomendacionComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "reportes/clientes", component: ReporteClientesPrestamosComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "reportes/cuotas", component: ReporteCuotasComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "reportes/pagos", component: ReporteHistoricoPagosComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "reportes/recaudacion", component: ReporteRecaudacionMensualComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "home", component: HomeComponent, canActivate: [GuardAuthGuard], data: { roles: ['Administrador','CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: '**', component: LoginComponent }
 ];
 
 @NgModule({

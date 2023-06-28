@@ -57,8 +57,8 @@ export class ClienteService {
   }
 
   checkIfDniExists(value: number): Observable<boolean> {
-    return this.httpClient.get<Cliente[]>(`${this.baseUrl}Cliente/getClientes`).pipe(
-      map(z => z.some((a) => a.nroDni === value)),
+    return this.httpClient.get<DTOCliente[]>(`${this.baseUrl}Cliente/getClientes`).pipe(
+      map(z => z.some((a) => a.dni === value)),
     )
   }
 

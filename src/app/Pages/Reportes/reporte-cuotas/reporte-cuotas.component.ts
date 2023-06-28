@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChartData, ChartOptions } from 'chart.js';
+import { Chart } from 'chart.js/dist';
+import { BaseChartDirective } from 'ng2-charts';
 import { Subscription } from 'rxjs';
 import { DTOCuotasMesEnCurso } from 'src/app/Models/cuotas';
 import { NavbarService } from 'src/app/Services/navbar.service';
@@ -12,44 +14,50 @@ import { ReportesService } from 'src/app/Services/reportes.service';
   styleUrls: ['./reporte-cuotas.component.css']
 })
 export class ReporteCuotasComponent {
+  @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
   labels: string[] = [];
   values: number[] = [];
   balance: DTOCuotasMesEnCurso[] = [];
   datos: ChartData = {
     labels: this.labels,
     datasets: [{
-      type: 'pie',
-      label: '',
+      type: 'doughnut',
       data: this.values,
-      borderColor: 'green',
       backgroundColor: ['rgba(0, 255, 0, 0.5)', 'rgba(255, 0, 0, 0.5)', 'rgba(0, 123, 255, 0.5)']
     }]
   }
 
   options: ChartOptions = {
     plugins: {
+      legend: {
+        display: true,
+        position: 'right',
+      },
       datalabels: {
-          display: true,
-          anchor: 'end',
-          align: 'top',
-          color: '#000',
-          font: {
-              weight: 'bold'
-          }
+        display: true,
+        anchor: 'end',
+        align: 'right',
+        offset: 0,
+        //color: '#000',
+        /*font: {
+            weight: 'bold'
+        },
+        color: function(context) {
+          return context.dataset.backgroundColor;
+        },*/
+        font: function(context) {
+          var w = context.chart.width;
+          return {
+            size: w < 512 ? 12 : 14,
+            weight: 'bold',
+          };
+        },/*
+        formatter: function(value, context) {
+          return context.chart.data.labels?[context.dataIndex];
+        }*/
       }
     },
-    responsive: true,
-    scales: {
-      y: {
-        beginAtZero: true,
-        type: 'linear',
-        position: 'left',
-        title: {display: true, text: 'Recaudación'},
-        ticks: {
-          stepSize: 50000
-        }
-      }
-    }
+    responsive: true
   }
 
   private subscription: Subscription = new Subscription();
@@ -65,7 +73,7 @@ export class ReporteCuotasComponent {
   getRecaudacionMensual(){
     this.subscription.add(
       this.servicio.GetCuotasMesEnCurso().subscribe({
-        next: (data) => {this.balance = data, this.llenarArrays(this.balance)},
+        next: (data) => {this.balance = data, this.llenarArrays(this.balance), console.log(this.labels), this.chart?.chart?.update()},
         error: (error) => {console.log(error)}
       })
     );

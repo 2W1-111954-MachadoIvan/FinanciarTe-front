@@ -23,14 +23,13 @@ export class RegistroCuotaComponent implements OnInit{
   entidadesF: EntidadesFinancieras[] = [];
   form!: FormGroup;
   index: number = 0;
-  idCliente: number;
+  idCliente!: number;
   inputDisabled: boolean = true;
 
   private subscription: Subscription = new Subscription();
 
   constructor(private servicioCuota: CuotasService, private servicioTransacciones: TransaccionesService, private formBuilder: FormBuilder,
               private router: Router, private params: ActivatedRoute, private nav: NavbarService){
-    this.idCliente = 33415122
     this.form = this.formBuilder.group({
       idTransaccion: ['',[Validators.required]],
       idEntidadFinanciera: ['',[Validators.required]],
@@ -40,6 +39,7 @@ export class RegistroCuotaComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.idCliente = this.params.snapshot.params['id'];
     this.getCombos();
     this.actualizarListado(this.idCliente);
     this.nav.show();

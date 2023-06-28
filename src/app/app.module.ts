@@ -7,6 +7,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgxSpinnerModule } from 'ngx-spinner'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -51,6 +52,7 @@ import { AltaUsuarioComponent } from './Pages/Usuarios/alta-usuario/alta-usuario
 import { ModificarUsuarioComponent } from './Pages/Usuarios/modificar-usuario/modificar-usuario.component';
 import { ListadoUsuarioComponent } from './Pages/Usuarios/listado-usuario/listado-usuario.component';
 import { VistaUsuarioComponent } from './Pages/Usuarios/vista-usuario/vista-usuario.component';
+import { DashboardComponent } from './Pages/Home-Login/dashboard/dashboard.component';
 
 registerLocaleData(localeEsAr);
 
@@ -88,7 +90,8 @@ registerLocaleData(localeEsAr);
     AltaUsuarioComponent,
     ModificarUsuarioComponent,
     ListadoUsuarioComponent,
-    VistaUsuarioComponent
+    VistaUsuarioComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -106,6 +109,7 @@ registerLocaleData(localeEsAr);
     MatSortModule,
     MatFormFieldModule,
     NgChartsModule,
+    NgxSpinnerModule
     //NgxChartsModule
   ],
   providers: [

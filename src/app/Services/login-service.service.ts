@@ -46,12 +46,13 @@ export class LoginService {
     this.currentUser = null;
   }
 
+  /*
   checkUseHasRole(roles: string[]): boolean {
     let json = localStorage.getItem('user');
     let object = json != null ? JSON.parse(json) : null;
     this.currentUser = object;
 
-    return (this.currentUser?.roles?.some(r => roles.indexOf(r) >= 0) ?? false) && this.usuarioLogueado();
+    return (this.currentUser?.tipoUsuario?.some(r => roles.indexOf(r) >= 0) ?? false) && this.usuarioLogueado();
   }
 
   checkCanLoad(roles: string[]): boolean {
@@ -60,7 +61,29 @@ export class LoginService {
     this.currentUser = object;
 
     console.log(this.currentUser);
-    return (this.currentUser?.roles?.some(r => roles.indexOf(r) >= 0) ?? false);
+    return (this.currentUser?.tipoUsuario?.some(r => roles.indexOf(r) >= 0) ?? false);
+  }
+  */
+  checkUseHasRole(roles: string[]): boolean {
+    let json = localStorage.getItem('user');
+    let object = json != null ? JSON.parse(json) : null;
+    this.currentUser = object;
+  
+    return this.currentUser !== null &&
+      this.currentUser.tipoUsuario !== undefined &&
+      roles.includes(this.currentUser.tipoUsuario) &&
+      this.usuarioLogueado();
+  }
+  
+  checkCanLoad(roles: string[]): boolean {
+    let json = localStorage.getItem('user');
+    let object = json != null ? JSON.parse(json) : null;
+    this.currentUser = object;
+  
+    //console.log(this.currentUser);
+    return this.currentUser !== null &&
+      this.currentUser.tipoUsuario !== undefined &&
+      roles.includes(this.currentUser.tipoUsuario);
   }
 
   getUser() : Usuario {
