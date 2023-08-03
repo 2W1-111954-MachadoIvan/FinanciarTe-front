@@ -70,4 +70,8 @@ export class ListadoClientesComponent {
     this.router.navigateByUrl("clientes/vista/" + id)
   }
 
+  nuevoCliente() {
+    this.router.navigateByUrl("/clientes/alta");
+  }
+
 }

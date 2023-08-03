@@ -44,6 +44,7 @@ export class LoginService {
     localStorage.removeItem('user');
     this.decodedToken = null;
     this.currentUser = null;
+    this.router.navigateByUrl('');
   }
 
   /*

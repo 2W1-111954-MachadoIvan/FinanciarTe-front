@@ -4,7 +4,7 @@
       <h1 class="fs-1"><i class="fa-solid fa-user-tag px-5"></i>{{ cliente.apellidos }}, {{ cliente.nombres }} </h1>
     </div>
   </div>
-  <div class="row">
+  <div class="row my-4 pb-5">
     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
       <div class="row">
         <h1><i class="fa-solid fa-address-card p-2"></i>Datos personales</h1>
@@ -59,12 +59,12 @@
       </div>
       <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-          <h3><i class="fa-solid fa-chart-line px-3"></i>Puntos actuales: {{cliente.beneficioScoring}}</h3>
+          <h3><i class="fa-solid fa-chart-line px-3"></i>Puntos actuales: {{cliente.puntosActuales}}</h3>
         </div>
       </div>
     </div>
   </div>
-  <div class="contactoAlternativo my-4 col-xl-10 col-lg-10 col-md-10 col-sm-12">    
+  <div class="contactoAlternativo my-4 py-5 col-xl-10 col-lg-10 col-md-10 col-sm-12">    
     <div class="row">
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
         <h1><i class="fa-solid fa-user-group px-3"></i>Contacto alternativo</h1>
@@ -82,19 +82,22 @@
       </div>
     </div>
   </div>
-  <div class="row my-4 col-xl-10 col-lg-10 col-md-10 col-sm-12">
+  <div class="row my-4 py-5 col-xl-10 col-lg-10 col-md-10 col-sm-12">
     <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12">
-      <h2 [ngClass]="{'habilitado': statusOk, 'no-habilitado': !statusOk}"> {{ statusString }}</h2>
+      <!-- <h2 [ngClass]="{'habilitado': statusOk, 'no-habilitado': !statusOk}"> {{ statusString }}</h2> -->
+      <h2 [ngStyle]="{ 'color': colorTexto }"> {{ statusString }}</h2>
     </div>
     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
       <div class="dropdown-center dropdown">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Acciones</button>
+        <button type="button" class="btn button-primary-action dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Acciones</button>
         <ul class="dropdown-menu">
           <li><a [ngClass]="{'disabled': !statusOk}" class="dropdown-item" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" (click)="newPrestamo(cliente.dni)">Nuevo Prestamo</a></li>
           <li><a class="dropdown-item" [routerLink]="'/prestamos/listado/' + cliente.dni">Listado de Prestamos</a></li>
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" [routerLink]="'/cuotas/alta/' + cliente.dni">Pagar Cuotas</a></li>
           <li><a class="dropdown-item" [routerLink]="'/cuotas/listado/' + cliente.dni">Cuotas activas</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" [routerLink]="'/puntos/puntaje-cliente/' + cliente.dni">Histórico de puntos</a></li>
         </ul>
       </div>
     </div>

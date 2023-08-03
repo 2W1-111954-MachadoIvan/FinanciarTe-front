@@ -1,12 +1,12 @@
 <div class="login">
   <div class="row">
     <div class="col-lg-9 col-md-9 col-sm-12">
-      <img src="../../../../assets/goldfoil-paper.png" alt="financiarTe-cover">
+      <img src="../../../../assets/login-cover.png" alt="financiarTe-cover">
     </div>
     <div class="col-lg-3 col-md-3 col-sm-12" style="background-color: white;">
       <form [formGroup]="loginForm" (ngSubmit)="login()" class="form px-3">
         <div>
-          <img src="../../../../assets/financiarte.png" alt="FinanciarTe" class="img-financiarte">
+          <img src="../../../../assets/marca-financiarte.png" alt="FinanciarTe" class="img-financiarte">
         </div>        
         <hr />
         <div class="mb-4 form-group">
@@ -21,7 +21,7 @@
             [class.red-icon]="this.loginForm.get('pass')?.invalid" />
         </div>
         <div class="d-grid">
-          <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Iniciar sesión</button>
+          <button type="submit" class="btn button-primary-action" [disabled]="loginForm.invalid">Iniciar sesión</button>
         </div>
         <div class="d-flex mt-2 justify-content-center" tippy="Volver al inicio">
         </div>

@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { Balance } from 'src/app/Models/balance';
 import { NavbarService } from 'src/app/Services/navbar.service';
 import { ReportesService } from 'src/app/Services/reportes.service';
+import { paletGraph1 } from 'src/app/Settings/colors';
 
 @Component({
   selector: 'app-reporte-balance-recomendacion',
@@ -14,6 +15,7 @@ import { ReportesService } from 'src/app/Services/reportes.service';
 })
 export class ReporteBalanceRecomendacionComponent {
   @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
+  colores = paletGraph1
   labels: string[] = [];
   montosIniciales: number[] = [];
   montosActuales: number[] = [];
@@ -24,15 +26,15 @@ export class ReporteBalanceRecomendacionComponent {
       type: 'bar',
       label: 'Monto Actual',
       data: this.montosActuales,
-      borderColor: 'green',
-      backgroundColor: ['rgba(0, 255, 0, 0.5)']
+      borderColor: this.colores.caribbeanCurrent,
+      backgroundColor: this.colores.mint,
     },
     {
       type: 'bar',
       label: 'Monto Inicial',
       data: this.montosIniciales,
-      borderColor: 'green',
-      backgroundColor: ['rgba(255, 0, 0, 0.5)']
+      borderColor: this.colores.caribbeanCurrent,
+      backgroundColor: this.colores.burntSienna,
     }]
   }
 

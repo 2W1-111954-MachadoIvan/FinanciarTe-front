@@ -73,6 +73,10 @@ export class AltaClienteComponent implements OnInit{
     })
   }
 
+  limpiarForm(){
+    this.form.reset();
+  }
+
   registrar(){
     const cliente: ComandoCliente = {
       nroDni: this.form.get('nroDni')?.value,
@@ -101,6 +105,9 @@ export class AltaClienteComponent implements OnInit{
           title: 'Error',
           text: data.message,
           showConfirmButton: false,
+          customClass: {
+            confirmButton: 'button-cancel-action'
+          },
         });
       } else {
         Swal.fire({
@@ -108,6 +115,9 @@ export class AltaClienteComponent implements OnInit{
           title: 'Felicidades',
           text: 'Cliente registrado con exito',
           showConfirmButton: false,
+          customClass: {
+            confirmButton: 'button-primary-action',
+          },
           timer: 3000
         });
         this.router.navigateByUrl("/clientes/vista/" + cliente.nroDni);

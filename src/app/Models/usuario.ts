@@ -1,11 +1,11 @@
 export interface Usuario {
-    nombres: string;
-    apellidos: string;
+    nombre: string;
+    apellido: string;
     calle: string;
     numero: number;
     telefono: number;
     legajo: number;
-    usuario: string;
+    user: string;
     contraseña: string;
     acitvo: boolean;
     rol: number;

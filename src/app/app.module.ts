@@ -53,6 +53,7 @@ import { ModificarUsuarioComponent } from './Pages/Usuarios/modificar-usuario/mo
 import { ListadoUsuarioComponent } from './Pages/Usuarios/listado-usuario/listado-usuario.component';
 import { VistaUsuarioComponent } from './Pages/Usuarios/vista-usuario/vista-usuario.component';
 import { DashboardComponent } from './Pages/Home-Login/dashboard/dashboard.component';
+import { PuntajeClienteComponent } from './Pages/Puntos/puntaje-cliente/puntaje-cliente.component';
 
 registerLocaleData(localeEsAr);
 
@@ -91,7 +92,8 @@ registerLocaleData(localeEsAr);
     ModificarUsuarioComponent,
     ListadoUsuarioComponent,
     VistaUsuarioComponent,
-    DashboardComponent
+    DashboardComponent,
+    PuntajeClienteComponent
   ],
   imports: [
     BrowserModule,

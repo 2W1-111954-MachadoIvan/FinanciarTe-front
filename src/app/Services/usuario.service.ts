@@ -33,8 +33,24 @@ export class UsuarioService {
     return this.httpClient.get(`${this.baseUrl}Usuarios/getViewUsuarios`,{ headers: this.headers})
   }
 
+  GetUsuarioByID(legajo: number):Observable<any>{
+    return this.httpClient.get(`${this.baseUrl}Usuarios/getUsuarioByID/${legajo}`,{ headers: this.headers})
+  }
+
+  GetUsuarioByUser(user: string):Observable<any>{
+    return this.httpClient.get(`${this.baseUrl}Usuarios/getUsuarioByUser/${user}`,{ headers: this.headers})
+  }
+
   PostUsuario(usuario: ComandoUsuario): Observable<ResultadoBase>{
     return this.httpClient.post<ResultadoBase>(`${this.baseUrl}Registro/PostRegister`, usuario, {headers: this.headers});
+  }
+
+  /*PostUsuario(usuario: ComandoUsuario): Observable<ResultadoBase>{
+    return this.httpClient.post<ResultadoBase>(`${this.baseUrl}Registro/PostRegister`, usuario, {headers: this.headers});
+  }*/
+
+  DeleteUsuario(id: number): Observable<any>{
+    return this.httpClient.delete<ResultadoBase>(`${this.baseUrl}Usuarios/deleteSoftUsuario/${id}`, {headers: this.headers});
   }
 
 }

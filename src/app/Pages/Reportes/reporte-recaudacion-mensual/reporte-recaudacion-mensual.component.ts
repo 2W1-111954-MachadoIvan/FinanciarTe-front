@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { RecaudacionMensual } from 'src/app/Models/recaudacion-mensual';
 import { NavbarService } from 'src/app/Services/navbar.service';
 import { ReportesService } from 'src/app/Services/reportes.service';
+import { paletGraph1 } from 'src/app/Settings/colors';
 
 @Component({
   selector: 'app-reporte-recaudacion-mensual',
@@ -14,6 +15,7 @@ import { ReportesService } from 'src/app/Services/reportes.service';
 })
 export class ReporteRecaudacionMensualComponent {
   @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
+  colores = paletGraph1
   valores: number[] = [];
   recaudacionMensual: RecaudacionMensual[] = [];
   datos: ChartData = {
@@ -21,8 +23,8 @@ export class ReporteRecaudacionMensualComponent {
     datasets: [{
       type: 'bar',
       data: this.valores,
-      borderColor: 'green',
-      backgroundColor: ['rgba(0, 123, 255, 0.5)', 'rgba(255, 0, 0, 0.5)'],
+      borderColor: this.colores.mint,
+      backgroundColor: [this.colores.mint, this.colores.burntSienna],
       yAxisID: 'y1'
     }]
   }

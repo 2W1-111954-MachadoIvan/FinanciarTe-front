@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ComandoUsuario, TipoUsuario } from 'src/app/Models/usuario';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ComandoUsuario, TipoUsuario, Usuario } from 'src/app/Models/usuario';
+import { LoginService } from 'src/app/Services/login-service.service';
 import { NavbarService } from 'src/app/Services/navbar.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
 import { LegajoValidator } from 'src/app/Validators/legajo-validatorAsync';
@@ -14,10 +15,14 @@ import Swal from 'sweetalert2';
 })
 export class ModificarUsuarioComponent {
   form!: FormGroup;
+  usuario!: Usuario;
+  id!: number;
+  usuarioActivo: boolean = false;
   tiposUsuarios: TipoUsuario[] = [];
   invalidFormMessage: boolean = false;
 
-  constructor(private nav: NavbarService, private formBuilder: FormBuilder, private servicioUsuario: UsuarioService, private router: Router){
+  constructor(private nav: NavbarService, private formBuilder: FormBuilder, private servicioUsuario: UsuarioService, 
+              private router: Router, private params: ActivatedRoute, private serviceLogin: LoginService){
     this.form = this.formBuilder.group({
       nombres: ['', [Validators.required, Validators.pattern('[a-zA-Z ]{2,254}')]],
       apellidos:['', [Validators.required, Validators.pattern('[a-zA-Z ]{2,254}')]],
@@ -35,6 +40,16 @@ export class ModificarUsuarioComponent {
   ngOnInit(): void {
     this.nav.show();
     this.getCombos();
+    this.id = this.params.snapshot.params['id'];
+    this.getUsuario(this.id)
+  }
+
+  corroborarUsuario(user: Usuario){
+    if(this.serviceLogin.getUser().user == user.user){
+      this.usuarioActivo = true;
+    }else{
+      this.usuarioActivo = false;
+    }
   }
 
   compararContraseñas(formGroup: FormGroup) {
@@ -55,6 +70,13 @@ export class ModificarUsuarioComponent {
   getCombos(){
     this.servicioUsuario.GetTipoUsuario().subscribe({
       next: (resultado) => {this.tiposUsuarios = resultado},
+      error: (error) => {console.log(error)}
+    })
+  }
+
+  getUsuario(id: number){
+    this.servicioUsuario.GetUsuarioByID(id).subscribe({
+      next: (data) => {this.usuario = data, this.form.patchValue(this.usuario), this.corroborarUsuario(this.usuario)},
       error: (error) => {console.log(error)}
     })
   }

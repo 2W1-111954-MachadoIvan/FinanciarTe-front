@@ -5,6 +5,7 @@ import { DTOListadoPrestamos, DTOPrestamo } from 'src/app/Models/prestamos';
 import { ClienteService } from 'src/app/Services/cliente.service';
 import { NavbarService } from 'src/app/Services/navbar.service';
 import { PrestamosService } from 'src/app/Services/prestamos.service';
+import { paletColorsApp, paletGraph1 } from 'src/app/Settings/colors';
 
 
 @Component({
@@ -14,6 +15,8 @@ import { PrestamosService } from 'src/app/Services/prestamos.service';
 })
 export class VistaClienteComponent implements OnInit {
   cliente!: DTOCliente;
+  colorTexto!: string;
+  colores = paletGraph1;
   id!: number;
   prestamos: DTOListadoPrestamos[] = [];
   offCanvasNewPrestamo: boolean = false;
@@ -55,17 +58,21 @@ export class VistaClienteComponent implements OnInit {
     if (prestamoPendiente !== undefined) {
       if (prestamoPendiente.montoAbonado / prestamoPendiente.montoADevolver > 0.65 && c.scoring >= 2) {
         this.statusOk = true;
+        this.colorTexto = this.colores.mint;
         this.statusString = `El cliente tiene un préstamo pendiente con el 65% o más abonado y su scoring es apto. Está en condiciones de refinanciar.`;
       } else {
         this.statusOk = false;
+        this.colorTexto = this.colores.burntSienna;
         this.statusString = `El cliente tiene un préstamo pendiente con menos del 65% abonado y/o su scoring no es apto. Por el momento, no está en condiciones de refinanciar su deuda.`;
       }
     } else {
       if (c.scoring === 1) {
         this.statusOk = false;
+        this.colorTexto = this.colores.burntSienna;
         this.statusString = `El cliente no tiene préstamos pendientes, pero su scoring no lo habilita a sacar un nuevo préstamo.`;
       } else {
         this.statusOk = true;
+        this.colorTexto = this.colores.mint;
         this.statusString = `El cliente no tiene préstamos pendientes y su scoring es apto para poder solicitar un nuevo préstamo. Consulta si desea adquirir uno ahora.`;
       }
     }

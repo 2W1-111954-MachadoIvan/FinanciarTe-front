@@ -94,6 +94,10 @@ export class ModificacionClienteComponent implements OnInit{
     })
   }
 
+  limpiarForm(){
+    this.form.reset();
+  }
+
   modificar(){
     console.log(this.form.value);
 

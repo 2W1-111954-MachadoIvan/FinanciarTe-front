@@ -16,7 +16,7 @@
               <h4>{{dt.detalle}}</h4>
             </div>
             <div class="col-sm-4">
-              <h3 class="text-end" [ngClass]="{'saldo-negativo': dt.monto< 0, 'saldo-positivo': dt.monto >= 0}">{{dt.monto | currency:'ARS':'symbol-narrow':'1.2-2'}}</h3>
+              <h3 class="text-end" [ngClass]="{'importe-negativo': dt.monto< 0, 'importe-positivo': dt.monto >= 0}">{{dt.monto | currency:'ARS':'symbol-narrow':'1.2-2'}}</h3>
             </div>
           </div>
           <hr>

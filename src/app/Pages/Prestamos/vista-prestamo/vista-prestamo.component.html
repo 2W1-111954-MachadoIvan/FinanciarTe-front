@@ -29,14 +29,14 @@
             </div>
             <div class="row" *ngIf="c.montoAbonado">
                 <div class="col-sm-8">
-                  <p [ngClass]="{'vencida': c.cuotaVencida === 'Vencida', 'enPlazo': c.cuotaVencida === 'En plazo'}">Pagada - {{c.cuotaVencida}} - {{c.fechaPago | date: "dd/MM/yyyy"}}</p>
+                  <p [ngClass]="{'importe-negativo': c.cuotaVencida === 'Vencida', 'importe-positivo': c.cuotaVencida === 'En plazo'}">Pagada - {{c.cuotaVencida}} - {{c.fechaPago | date: "dd/MM/yyyy"}}</p>
                 </div>
                 <div class="col-sm-4">
                   <p class="text-end">{{c.montoAbonado | currency:'ARS':'symbol-narrow':'1.2-2'}}</p>
                 </div>
             </div>
             <div class="row" *ngIf="!c.montoAbonado">
-                <p [ngClass]="{'vencida': c.cuotaVencida === 'Vencida', 'enPlazo': c.cuotaVencida === 'En plazo'}">{{c.cuotaVencida}}</p>
+                <p [ngClass]="{'importe-negativo': c.cuotaVencida === 'Vencida', 'importe-positivo': c.cuotaVencida === 'En plazo'}">{{c.cuotaVencida}}</p>
             </div>
             <hr>
           </article>

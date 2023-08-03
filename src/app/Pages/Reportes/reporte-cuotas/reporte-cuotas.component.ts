@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { DTOCuotasMesEnCurso } from 'src/app/Models/cuotas';
 import { NavbarService } from 'src/app/Services/navbar.service';
 import { ReportesService } from 'src/app/Services/reportes.service';
+import { paletGraph1 } from 'src/app/Settings/colors';
 
 @Component({
   selector: 'app-reporte-cuotas',
@@ -15,6 +16,7 @@ import { ReportesService } from 'src/app/Services/reportes.service';
 })
 export class ReporteCuotasComponent {
   @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
+  colores = paletGraph1;
   labels: string[] = [];
   values: number[] = [];
   balance: DTOCuotasMesEnCurso[] = [];
@@ -23,7 +25,7 @@ export class ReporteCuotasComponent {
     datasets: [{
       type: 'doughnut',
       data: this.values,
-      backgroundColor: ['rgba(0, 255, 0, 0.5)', 'rgba(255, 0, 0, 0.5)', 'rgba(0, 123, 255, 0.5)']
+      backgroundColor: [this.colores.mint, this.colores.burntSienna, this.colores.electricBlue]
     }]
   }
 

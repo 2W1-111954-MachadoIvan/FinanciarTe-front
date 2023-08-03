@@ -1,7 +1,7 @@
 <div class="container col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 pad py-4">
     <form [formGroup]="form" class="container py-3 bg-Blanco rounded-4 mtop">
         <div class="container text-center">
-            <h1 class=" fs-1">Registrar Cliente</h1>
+            <h1 class=" fs-1">Modificar Usuario</h1>
         </div>
         <hr />
         <div class="row">
@@ -30,7 +30,6 @@
                         <div class="form-group">
                             <label>Legajo (ingresar DNI)</label>
                             <input type="number" class="form-control" id="legajo" formControlName="legajo" placeholder="Sin puntos ni espacio" [class.red-icon]="this.form.get('legajo')?.invalid" />
-                            <span class="invalid" *ngIf="form.controls['legajo'].hasError('legajoAlreadyExists')">Legajo ya registrado en la base de datos</span>
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-1">
@@ -72,7 +71,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row py-2">
+                <div class="row py-2" *ngIf="usuarioActivo">
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-1">
                         <div class="form-group">
                             <label>Contraseña</label>

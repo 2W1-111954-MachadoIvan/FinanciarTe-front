@@ -31,6 +31,8 @@ import { ListadoUsuarioComponent } from './Pages/Usuarios/listado-usuario/listad
 import { VistaUsuarioComponent } from './Pages/Usuarios/vista-usuario/vista-usuario.component';
 import { GuardAuthGuard } from './Security/guard-auth.guard';
 import { DashboardComponent } from './Pages/Home-Login/dashboard/dashboard.component';
+import { ListadoPuntajeComponent } from './Pages/Puntos/listado-puntaje/listado-puntaje.component';
+import { PuntajeClienteComponent } from './Pages/Puntos/puntaje-cliente/puntaje-cliente.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -52,10 +54,12 @@ const routes: Routes = [
   { path: "cuotas/alta/:id", component: RegistroCuotaComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
   { path: "cuotas/listado/:id", component: ListadoCuotasComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
   { path: "cuotas/modificar/:id", component: ModificarCuotaComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
-  { path: "usuarios/alta", component: AltaUsuarioComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
-  { path: "usuarios/modificar/:id", component: ModificarUsuarioComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] }  },
-  { path: "usuarios/listado", component: ListadoUsuarioComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
-  { path: "usuarios/vista/:id", component: VistaUsuarioComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "puntos/listado", component: ListadoPuntajeComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "puntos/puntaje-cliente/:id", component: PuntajeClienteComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "usuarios/alta", component: AltaUsuarioComponent, canActivate: [GuardAuthGuard], data: { roles: ['Administrador', 'CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "usuarios/modificar/:id", component: ModificarUsuarioComponent, canActivate: [GuardAuthGuard], data: { roles: ['Administrador', 'CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] }  },
+  { path: "usuarios/listado", component: ListadoUsuarioComponent, canActivate: [GuardAuthGuard], data: { roles: ['Administrador', 'CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
+  { path: "usuarios/vista/:id", component: VistaUsuarioComponent, canActivate: [GuardAuthGuard], data: { roles: ['Administrador', 'CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
   { path: "reportes/dolar-indice", component: ReporteVariacionDolarIndiceComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
   { path: "reportes/balance", component: ReporteBalanceRecomendacionComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },
   { path: "reportes/clientes", component: ReporteClientesPrestamosComponent, canActivate: [GuardAuthGuard], data: { roles: ['CEO', 'Director', 'Gerente', 'Jefe', 'Agente'] } },

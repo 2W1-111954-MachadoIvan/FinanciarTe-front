@@ -9,7 +9,7 @@ import { ReportesService } from 'src/app/Services/reportes.service';
 import { NavbarService } from 'src/app/Services/navbar.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BaseChartDirective } from 'ng2-charts';
-import { Colors } from 'src/app/Settings/colors';
+import { Colors, paletGraph1 } from 'src/app/Settings/colors';
 import 'chartjs-adapter-moment';
 
 
@@ -20,7 +20,7 @@ import 'chartjs-adapter-moment';
 })
 export class ReporteVariacionDolarIndiceComponent implements OnInit{
   @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
-  colores = Colors
+  colores = paletGraph1
   form!: FormGroup;
   fechaDesde!: any;
   fechaHasta!: any;
@@ -36,23 +36,23 @@ export class ReporteVariacionDolarIndiceComponent implements OnInit{
       type: 'bar',
       label: 'Dolar Oficial',
       data: this.hDolarOficial,
-      borderColor: this.colores.ligthgreen,
-      backgroundColor: this.colores.ligthgreen,
+      borderColor: this.colores.mint,
+      backgroundColor: this.colores.mint,
       yAxisID: 'y1'
     }, {
       type: 'bar',
       label: 'Dolar Blue',
       data: this.hDolarBlue,
-      borderColor: this.colores.lightblue,
-      backgroundColor: this.colores.lightblue,
+      borderColor: this.colores.electricBlue,
+      backgroundColor: this.colores.electricBlue,
       yAxisID: 'y1'
     }, {
       type: 'line',
       label: 'Indice FinanciarTe',
       data: this.hIndices,
       fill: false,
-      borderColor: this.colores.indianred,
-      pointBackgroundColor: this.colores.indianred,
+      borderColor: this.colores.selectiveYellow,
+      pointBackgroundColor: this.colores.selectiveYellow,
       yAxisID: 'y2'
     }]
   }

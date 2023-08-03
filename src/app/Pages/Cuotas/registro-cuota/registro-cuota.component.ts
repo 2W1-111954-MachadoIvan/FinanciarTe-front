@@ -78,7 +78,10 @@ export class RegistroCuotaComponent implements OnInit{
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Ya no hay mas cuotas para este prestamo'
+        text: 'Ya no hay mas cuotas para este prestamo',
+        customClass: {
+          confirmButton: 'button-primary-action'
+        }
       })
     }
   }
@@ -131,6 +134,9 @@ export class RegistroCuotaComponent implements OnInit{
           title: 'Error',
           text: data.message,
           showConfirmButton: false,
+          customClass: {
+            confirmButton: 'button-cancel-action'
+          }
         });
       } else {
         Swal.fire({
@@ -138,6 +144,9 @@ export class RegistroCuotaComponent implements OnInit{
           title: 'Felicidades',
           text: 'Transaccion registrada con exito',
           showConfirmButton: false,
+          customClass: {
+            confirmButton: 'button-primary-action'
+          },
           timer: 3000
         });
         this.router.navigateByUrl("/cuotas/listado/" + this.idCliente);

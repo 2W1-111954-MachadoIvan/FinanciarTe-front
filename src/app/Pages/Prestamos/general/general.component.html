@@ -1,9 +1,15 @@
-<div class="container">
-    <h1>Listado de Prestamos</h1>
-    <hr />
-    <div class="table-responsive container">
-      <table class="table table-hover mtc-5">
-        <thead class="table table-hover mtc-5">
+<div class="p-5 mx-3">
+  <div class="row p-2">
+    <div class="col-lg-10 col-md-10 col-sm-12">
+        <h1>Listado de Prestamos</h1>
+    </div>
+  </div>
+  <hr>
+  <br>
+  <div class="table-container">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead class="table table-hover table-headers">
           <tr>
             <th scope="col" class="text-center">ID Prestamo</th>
             <th scope="col" class="text-center">ID Cliente</th>
@@ -21,14 +27,15 @@
             <td scope="col" class="text-center">{{p.estado}}</td>
             <td scope="col" class="text-center">{{p.cuotasPagas}}</td>
             <td scope="col" class="text-center">
-              <i type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" (click)="verPrestamo(p.idPrestamo)" class="fa-solid fa-eye me-3 icono" tippy="Ver Transaccion"></i>
-              <i type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" (click)="modificarPrestamo(p.idPrestamo)"  class="fa-solid fa-pencil me-3 icono" tippy="Editar Transaccion" ></i>
-              <i type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" (click)="anular(p.idPrestamo)" class="fa-solid fa-ban me-3 icono" tippy="Anular Transaccion"></i>
+              <i type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" (click)="verPrestamo(p.idPrestamo)" class="fa-solid fa-eye me-3 icono iconos-fontawesome" tippy="Ver Transaccion"></i>
+              <i type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" (click)="modificarPrestamo(p.idPrestamo)"  class="fa-solid fa-pencil me-3 icono iconos-fontawesome" tippy="Editar Transaccion" ></i>
+              <i type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" (click)="anular(p.idPrestamo)" class="fa-solid fa-ban me-3 icono iconos-fontawesome" tippy="Anular Transaccion"></i>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
+  </div>
 </div>
 
 <div *ngIf="offCanvasVista == true">

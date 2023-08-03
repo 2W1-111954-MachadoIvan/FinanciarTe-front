@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 import { ResumenPrestamos } from 'src/app/Models/resumen-prestamos';
 import { NavbarService } from 'src/app/Services/navbar.service';
 import { ReportesService } from 'src/app/Services/reportes.service';
-import { Colors } from 'src/app/Settings/colors';
+import { Colors, paletGraph1 } from 'src/app/Settings/colors';
 
 @Component({
   selector: 'app-reporte-clientes-prestamos',
@@ -15,7 +15,7 @@ import { Colors } from 'src/app/Settings/colors';
 })
 export class ReporteClientesPrestamosComponent {
   @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
-  colores = Colors
+  colores = paletGraph1
   labels: string[] = [];
   qPrestamos: number[] = [];
   qCancelados: number[] = [];
@@ -31,31 +31,31 @@ export class ReporteClientesPrestamosComponent {
       type: 'bar',
       label: 'Total Prestamos',
       data: this.qPrestamos,
-      backgroundColor: this.colores.lightblue
+      backgroundColor: this.colores.electricBlue
     },
     {
       type: 'bar',
       label: 'Cancelados',
       data: this.qCancelados,
-      backgroundColor: this.colores.green
+      backgroundColor: this.colores.mint
     },
     {
       type: 'bar',
       label: 'Pendientes',
       data: this.qPendientes,
-      backgroundColor: this.colores.orange
+      backgroundColor: this.colores.selectiveYellow
     },
     {
       type: 'bar',
       label: 'Refinanciados',
       data: this.qRefinanciados,
-      backgroundColor: this.colores.red
+      backgroundColor: this.colores.burntSienna
     },
     {
       type: 'line',
       label: '% Cumpl. Cuotas',
       data: this.qPorcCumplCuotas,
-      backgroundColor: this.colores.lightcoral,
+      backgroundColor: this.colores.yellowGreen,
       yAxisID: 'line'
     },]
   }
