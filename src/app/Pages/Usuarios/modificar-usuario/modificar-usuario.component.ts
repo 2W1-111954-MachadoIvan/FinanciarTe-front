@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ComandoUsuario, TipoUsuario, Usuario } from 'src/app/Models/usuario';
+import { ComandoPutUsuario, ComandoUsuario, TipoUsuario, Usuario } from 'src/app/Models/usuario';
 import { LoginService } from 'src/app/Services/login-service.service';
 import { NavbarService } from 'src/app/Services/navbar.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
@@ -26,7 +26,7 @@ export class ModificarUsuarioComponent {
     this.form = this.formBuilder.group({
       nombres: ['', [Validators.required, Validators.pattern('[a-zA-Z ]{2,254}')]],
       apellidos:['', [Validators.required, Validators.pattern('[a-zA-Z ]{2,254}')]],
-      legajo: ['',[Validators.required, Validators.pattern('^([1-9]\\d*)|[0]')], [LegajoValidator.legajoValidator(this.servicioUsuario)]],
+      legajo: ['',[Validators.required, Validators.pattern('^([1-9]\\d*)|[0]')]],
       telefono: ['',[Validators.required, Validators.pattern('^([1-9]\\d*)|[0]')]],
       calle: ['', [Validators.required, Validators.pattern('[a-zA-Z ]{2,254}')]],
       numero: ['',[Validators.required, Validators.pattern('^([1-9]\\d*)|[0]')]],
@@ -74,6 +74,10 @@ export class ModificarUsuarioComponent {
     })
   }
 
+  limpiarForm(){
+    this.form.reset();
+  }
+
   getUsuario(id: number){
     this.servicioUsuario.GetUsuarioByID(id).subscribe({
       next: (data) => {this.usuario = data, this.form.patchValue(this.usuario), this.corroborarUsuario(this.usuario)},
@@ -83,7 +87,7 @@ export class ModificarUsuarioComponent {
   
   actualizar(){
     if(!this.form.invalid){
-      const u: ComandoUsuario = {
+      const u: ComandoPutUsuario = {
         nombre: this.form.controls['nombres'].value,
         apellido: this.form.controls['apellidos'].value,
         legajo: this.form.controls['legajo'].value,
@@ -92,28 +96,32 @@ export class ModificarUsuarioComponent {
         numero: this.form.controls['numero'].value,
         user: this.form.controls['user'].value,
         idTipoUsuario: this.form.controls['idTipoUsuario'].value,
-        pass: this.form.controls['pass'].value
+        passNueva: this.form.controls['pass'].value
       };
       console.log(u)
-      /*this.servicioUsuario.PostUsuario(u).subscribe((data) => {
+      this.servicioUsuario.PutUsuario(u).subscribe((data) => {
         if(!data.ok){
           Swal.fire({
             icon: 'error',
             title: 'Error',
             text: data.message,
-            showConfirmButton: false,
+            showConfirmButton: true,
+            customClass: {
+              confirmButton: 'button-primary-action',
+              cancelButton: 'button-cancel-action'
+            },
           });
         } else {
           Swal.fire({
             icon: 'success',
             title: 'Felicidades',
-            text: 'Usuario registrado con exito',
+            text: 'Usuario actualizado con éxito',
             showConfirmButton: false,
             timer: 3000
           });
-          //this.router.navigateByUrl("/clientes/vista/" + cliente.nroDni);
+          this.router.navigateByUrl("/usuarios/listado");
         }
-      });*/      
+      });      
     }else{
       this.invalidFormMessage = true
     }

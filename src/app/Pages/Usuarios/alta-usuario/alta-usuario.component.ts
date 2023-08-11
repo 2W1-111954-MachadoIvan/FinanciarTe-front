@@ -58,6 +58,10 @@ export class AltaUsuarioComponent implements OnInit{
       error: (error) => {console.log(error)}
     })
   }
+
+  limpiarForm(){
+    this.form.reset();
+  }
   
   registrar(){
     if(!this.form.invalid){

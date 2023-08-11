@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { Observable, map } from 'rxjs';
-import { ComandoUsuario, Usuario } from '../Models/usuario';
+import { ComandoPutUsuario, ComandoUsuario, Usuario } from '../Models/usuario';
 import { ResultadoBase } from '../Models/resultado-base';
 
 @Injectable({
@@ -45,9 +45,9 @@ export class UsuarioService {
     return this.httpClient.post<ResultadoBase>(`${this.baseUrl}Registro/PostRegister`, usuario, {headers: this.headers});
   }
 
-  /*PostUsuario(usuario: ComandoUsuario): Observable<ResultadoBase>{
-    return this.httpClient.post<ResultadoBase>(`${this.baseUrl}Registro/PostRegister`, usuario, {headers: this.headers});
-  }*/
+  PutUsuario(usuario: ComandoPutUsuario): Observable<ResultadoBase>{
+    return this.httpClient.put<ResultadoBase>(`${this.baseUrl}Registro/PutUsuario`, usuario, {headers: this.headers});
+  }
 
   DeleteUsuario(id: number): Observable<any>{
     return this.httpClient.delete<ResultadoBase>(`${this.baseUrl}Usuarios/deleteSoftUsuario/${id}`, {headers: this.headers});

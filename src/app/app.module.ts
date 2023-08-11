@@ -54,6 +54,7 @@ import { ListadoUsuarioComponent } from './Pages/Usuarios/listado-usuario/listad
 import { VistaUsuarioComponent } from './Pages/Usuarios/vista-usuario/vista-usuario.component';
 import { DashboardComponent } from './Pages/Home-Login/dashboard/dashboard.component';
 import { PuntajeClienteComponent } from './Pages/Puntos/puntaje-cliente/puntaje-cliente.component';
+import { DataTablesModule } from 'angular-datatables'
 
 registerLocaleData(localeEsAr);
 
@@ -96,6 +97,7 @@ registerLocaleData(localeEsAr);
     PuntajeClienteComponent
   ],
   imports: [
+    DataTablesModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -120,3 +122,5 @@ registerLocaleData(localeEsAr);
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+

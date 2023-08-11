@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Route, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { Subject, Subscription } from 'rxjs';
 import { DTOUsuario } from 'src/app/Models/usuario';
 import { NavbarService } from 'src/app/Services/navbar.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
@@ -19,7 +19,7 @@ export class ListadoUsuarioComponent implements OnInit{
   constructor(private nav: NavbarService, private servicioUsuarios: UsuarioService, private router: Router){}
 
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.nav.show();
     this.actualizarListado();
   }

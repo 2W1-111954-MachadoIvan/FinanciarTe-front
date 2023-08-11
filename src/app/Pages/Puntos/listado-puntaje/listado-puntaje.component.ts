@@ -11,7 +11,7 @@ import { PuntosService } from 'src/app/Services/puntos.service';
   styleUrls: ['./listado-puntaje.component.css']
 })
 export class ListadoPuntajeComponent implements OnInit{
-
+  dtOptions: DataTables.Settings = {};
   puntos: Puntos[] = [];
 
   private subscription: Subscription = new Subscription();
@@ -26,10 +26,11 @@ export class ListadoPuntajeComponent implements OnInit{
   actualizarListado(){
     this.subscription.add(
       this.servicio.GetHistoricoPuntos().subscribe({
-        next: (data) => {this.puntos = data, console.log(this.puntos) },
+        next: (data) => {this.puntos = data, console.log(this.puntos)},
         error: (error) => {console.log(error)}
       })
     );
   }
 
 }
+

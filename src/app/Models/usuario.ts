@@ -28,6 +28,18 @@ export interface ComandoUsuario {
     idTipoUsuario: number
 }
 
+export interface ComandoPutUsuario {
+    nombre: string,
+    apellido: string,
+    calle: string,
+    numero: number,
+    telefono: number,
+    legajo: number,
+    user: string,
+    idTipoUsuario: number
+    passNueva: string
+}
+
 export interface DTOUsuario {
     nombres: string,
     apellidos: string,
